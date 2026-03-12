@@ -376,7 +376,6 @@ const User = {
 
     return currentChatCount < user.dailyMessageLimit;
   },
-};
 
   /**
    * Find a user by their Clerk ID.
