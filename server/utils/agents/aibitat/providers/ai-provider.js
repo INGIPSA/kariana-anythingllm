@@ -388,13 +388,31 @@ class Provider {
     workspace = null,
     user = null,
   }) {
-    if (!workspace?.openAiPrompt)
-      return Provider.defaultSystemPromptForProvider(provider);
-    return await SystemPromptVariables.expandSystemPromptVariables(
-      workspace.openAiPrompt,
-      user?.id || null,
-      workspace.id
-    );
+    let prompt;
+    if (!workspace?.openAiPrompt) {
+      prompt = Provider.defaultSystemPromptForProvider(provider);
+    } else {
+      prompt = await SystemPromptVariables.expandSystemPromptVariables(
+        workspace.openAiPrompt,
+        user?.id || null,
+        workspace.id
+      );
+    }
+
+    // Append DCC context if any DCC applications are connected
+    try {
+      const {
+        getDCCSystemPromptInjection,
+      } = require("../../../DCCHost/systemPrompt");
+      const dccPrompt = getDCCSystemPromptInjection();
+      if (dccPrompt) {
+        prompt += `\n\n${dccPrompt}`;
+      }
+    } catch {
+      // DCCHost module not available - skip DCC prompt injection
+    }
+
+    return prompt;
   }
 
   /**
