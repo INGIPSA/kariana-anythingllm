@@ -170,8 +170,11 @@ export default {
     mobileConnections: () => {
       return `/settings/mobile-connections`;
     },
+    connections: () => {
+      return `/settings/connections`;
+    },
     dccConnections: () => {
-      return `/settings/dcc-connections`;
+      return `/settings/connections`;
     },
     projects: () => {
       return `/settings/projects`;

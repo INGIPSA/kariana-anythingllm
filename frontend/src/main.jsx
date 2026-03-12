@@ -373,12 +373,19 @@ const router = createBrowserRouter([
         },
       },
       {
+        path: "/settings/connections",
+        lazy: async () => {
+          const { default: Connections } = await import(
+            "@/pages/GeneralSettings/Connections"
+          );
+          return { element: <AdminRoute Component={Connections} /> };
+        },
+      },
+      {
         path: "/settings/dcc-connections",
         lazy: async () => {
-          const { default: DCCConnections } = await import(
-            "@/pages/GeneralSettings/DCCConnections"
-          );
-          return { element: <AdminRoute Component={DCCConnections} /> };
+          const { Navigate } = await import("react-router-dom");
+          return { element: <Navigate to="/settings/connections" replace /> };
         },
       },
       {
