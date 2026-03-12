@@ -83,6 +83,54 @@ const DCCConnection = {
         error: e.message,
       }));
   },
+
+  connect: async function (id) {
+    return await fetch(`${API_BASE}/v1/dcc-connections/${id}/connect`, {
+      method: "POST",
+      headers: baseHeaders(),
+    })
+      .then((res) => res.json())
+      .catch((e) => ({
+        success: false,
+        error: e.message,
+      }));
+  },
+
+  disconnect: async function (id) {
+    return await fetch(`${API_BASE}/v1/dcc-connections/${id}/disconnect`, {
+      method: "POST",
+      headers: baseHeaders(),
+    })
+      .then((res) => res.json())
+      .catch((e) => ({
+        success: false,
+        error: e.message,
+      }));
+  },
+
+  status: async function () {
+    return await fetch(`${API_BASE}/v1/dcc-connections/status`, {
+      headers: baseHeaders(),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Could not fetch DCC connection status.");
+        return res.json();
+      })
+      .then((res) => res.connections || [])
+      .catch(() => []);
+  },
+
+  tools: async function () {
+    return await fetch(`${API_BASE}/v1/dcc-connections/tools`, {
+      headers: baseHeaders(),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Could not fetch DCC tools.");
+        return res.json();
+      })
+      .then((res) => res.tools || [])
+      .catch(() => []);
+  },
 };
 
 export default DCCConnection;
