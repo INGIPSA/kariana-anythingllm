@@ -9,9 +9,6 @@ import System from "./models/system";
 import { useNavigate } from "react-router-dom";
 import { safeJsonParse } from "@/utils/request";
 
-const CLERK_TOKEN_KEY = "kariana_clerk_token";
-const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
 export const AuthContext = createContext(null);
 export function AuthProvider(props) {
   const localUser = localStorage.getItem(AUTH_USER);
@@ -40,7 +37,6 @@ export function AuthProvider(props) {
       localStorage.removeItem(AUTH_TOKEN);
       localStorage.removeItem(AUTH_TIMESTAMP);
       localStorage.removeItem(USER_PROMPT_INPUT_MAP);
-      localStorage.removeItem(CLERK_TOKEN_KEY);
       setStore({ user: null, authToken: null });
     },
   });
@@ -61,7 +57,6 @@ export function AuthProvider(props) {
         localStorage.removeItem(AUTH_TOKEN);
         localStorage.removeItem(AUTH_TIMESTAMP);
         localStorage.removeItem(USER_PROMPT_INPUT_MAP);
-        localStorage.removeItem(CLERK_TOKEN_KEY);
         setStore({ user: null, authToken: null });
         navigate("/login");
         return;
@@ -78,89 +73,7 @@ export function AuthProvider(props) {
 
   return (
     <AuthContext.Provider value={{ store, actions }}>
-      {clerkPubKey ? (
-        <ClerkTokenSync setStore={setStore}>{props.children}</ClerkTokenSync>
-      ) : (
-        props.children
-      )}
+      {props.children}
     </AuthContext.Provider>
   );
-}
-
-/**
- * Inner component that syncs the Clerk session token to localStorage
- * so that baseHeaders() can pick it up for API requests.
- * Only rendered when Clerk is enabled.
- */
-function ClerkTokenSync({ children, setStore }) {
-  const [clerkLoaded, setClerkLoaded] = useState(false);
-  const [ClerkHooks, setClerkHooks] = useState(null);
-
-  useEffect(() => {
-    import("@clerk/clerk-react")
-      .then((mod) => {
-        setClerkHooks(mod);
-        setClerkLoaded(true);
-      })
-      .catch(() => setClerkLoaded(true));
-  }, []);
-
-  if (!clerkLoaded) return <>{children}</>;
-  if (!ClerkHooks) return <>{children}</>;
-
-  return (
-    <ClerkTokenSyncInner ClerkHooks={ClerkHooks} setStore={setStore}>
-      {children}
-    </ClerkTokenSyncInner>
-  );
-}
-
-function ClerkTokenSyncInner({ children, ClerkHooks, setStore }) {
-  const { useAuth, useUser } = ClerkHooks;
-  const { getToken, isSignedIn } = useAuth();
-  const { user: clerkUser } = useUser();
-
-  useEffect(() => {
-    if (!isSignedIn) {
-      localStorage.removeItem("kariana_clerk_token");
-      return;
-    }
-
-    async function syncToken() {
-      try {
-        const token = await getToken();
-        if (token) {
-          localStorage.setItem("kariana_clerk_token", token);
-          // Also set as the main auth token so existing code picks it up
-          localStorage.setItem(AUTH_TOKEN, token);
-
-          // Map Clerk user to local user shape for the store
-          if (clerkUser) {
-            const mappedUser = {
-              username:
-                clerkUser.username ||
-                clerkUser.primaryEmailAddress?.emailAddress ||
-                "clerk-user",
-              role: "default", // Will be determined server-side
-            };
-            localStorage.setItem(AUTH_USER, JSON.stringify(mappedUser));
-            setStore((prev) => ({
-              ...prev,
-              user: mappedUser,
-              authToken: token,
-            }));
-          }
-        }
-      } catch (e) {
-        console.warn("[Auth] Failed to get Clerk token:", e.message);
-      }
-    }
-
-    syncToken();
-    // Refresh token periodically (Clerk tokens are short-lived)
-    const interval = setInterval(syncToken, 50000); // ~50 seconds
-    return () => clearInterval(interval);
-  }, [isSignedIn, clerkUser, getToken, setStore]);
-
-  return <>{children}</>;
 }

@@ -866,6 +866,24 @@ const System = {
       });
   },
 
+  clerkConfig: async function () {
+    return await fetch(`${API_BASE}/system/clerk-config`)
+      .then((res) => res.json())
+      .catch(() => ({ clerkEnabled: false }));
+  },
+
+  clerkAuth: async function (token) {
+    return await fetch(`${API_BASE}/system/clerk-auth`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .catch((e) => ({ valid: false, error: e.message }));
+  },
+
   experimentalFeatures: {
     liveSync: LiveDocumentSync,
     agentPlugins: AgentPlugins,

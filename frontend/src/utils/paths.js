@@ -15,6 +15,7 @@ export default {
   home: () => {
     return "/";
   },
+  pricing: () => "/pricing",
   login: (noTry = false) => {
     return `/login${noTry ? "?nt=1" : ""}`;
   },
