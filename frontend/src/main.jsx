@@ -381,6 +381,15 @@ const router = createBrowserRouter([
           return { element: <AdminRoute Component={DCCConnections} /> };
         },
       },
+      {
+        path: "/settings/projects",
+        lazy: async () => {
+          const { default: ProjectsSettings } = await import(
+            "@/pages/GeneralSettings/Projects"
+          );
+          return { element: <AdminRoute Component={ProjectsSettings} /> };
+        },
+      },
       // Catch-all route for 404s
       {
         path: "*",

@@ -11,6 +11,7 @@ import {
   Nut,
   Toolbox,
   Plugs,
+  FolderSimple,
 } from "@phosphor-icons/react";
 import AgentIcon from "@/media/animations/agent-static.png";
 import CommunityHubIcon from "@/media/illustrations/community-hub.png";
@@ -216,6 +217,14 @@ const SidebarOptions = ({ user = null, t }) => (
   <CanViewChatHistoryProvider>
     {({ viewable: canViewChatHistory }) => (
       <>
+        <Option
+          btnText="Projects"
+          icon={<FolderSimple className="h-5 w-5 flex-shrink-0" />}
+          href={paths.settings.projects()}
+          user={user}
+          flex={true}
+          roles={["admin"]}
+        />
         <Option
           btnText={t("settings.ai-providers")}
           icon={<Gear className="h-5 w-5 flex-shrink-0" />}
