@@ -393,3 +393,16 @@ model workspace_parsed_files {
   @@index([workspaceId])
   @@index([userId])
 }
+
+model dcc_connections {
+  id            Int      @id @default(autoincrement())
+  name          String
+  appType       String
+  host          String   @default("localhost")
+  port          Int
+  transport     String   @default("sse")
+  autoConnect   Boolean  @default(false)
+  createdBy     Int?
+  createdAt     DateTime @default(now())
+  lastUpdatedAt DateTime @default(now())
+}
