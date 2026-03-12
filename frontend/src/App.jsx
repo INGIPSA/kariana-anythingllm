@@ -14,6 +14,7 @@ import { PWAModeProvider } from "./PWAContext";
 import KeyboardShortcutsHelp from "@/components/KeyboardShortcutsHelp";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorBoundaryFallback from "./components/ErrorBoundaryFallback";
+import { ClerkProviderWrapper } from "./ClerkProviderWrapper";
 
 export default function App() {
   const location = useLocation();
@@ -23,23 +24,25 @@ export default function App() {
       onError={console.error}
       resetKeys={[location.pathname]}
     >
-      <ThemeProvider>
-        <PWAModeProvider>
-          <Suspense fallback={<FullScreenLoader />}>
-            <AuthProvider>
-              <LogoProvider>
-                <PfpProvider>
-                  <I18nextProvider i18n={i18n}>
-                    <Outlet />
-                    <ToastContainer />
-                    <KeyboardShortcutsHelp />
-                  </I18nextProvider>
-                </PfpProvider>
-              </LogoProvider>
-            </AuthProvider>
-          </Suspense>
-        </PWAModeProvider>
-      </ThemeProvider>
+      <ClerkProviderWrapper>
+        <ThemeProvider>
+          <PWAModeProvider>
+            <Suspense fallback={<FullScreenLoader />}>
+              <AuthProvider>
+                <LogoProvider>
+                  <PfpProvider>
+                    <I18nextProvider i18n={i18n}>
+                      <Outlet />
+                      <ToastContainer />
+                      <KeyboardShortcutsHelp />
+                    </I18nextProvider>
+                  </PfpProvider>
+                </LogoProvider>
+              </AuthProvider>
+            </Suspense>
+          </PWAModeProvider>
+        </ThemeProvider>
+      </ClerkProviderWrapper>
     </ErrorBoundary>
   );
 }
