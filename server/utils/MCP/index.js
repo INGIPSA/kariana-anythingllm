@@ -221,6 +221,131 @@ class MCPCompatibilityLayer extends MCPHypervisor {
    * @param {Object} result - The result to return
    * @returns {string} The result as a string
    */
+  /**
+   * Get all active DCC tools as agent-compatible plugin names.
+   * Returns plugin name identifiers in @@dcc_{appType}_{toolName} format
+   * that can be loaded into the agent's function list.
+   * @returns {Array<{name: string, pluginName: string}>} Array of DCC plugin identifiers
+   */
+  activeDCCTools() {
+    let DCCMCPHost;
+    try {
+      DCCMCPHost = require("../DCCHost");
+    } catch (e) {
+      return [];
+    }
+
+    let host;
+    try {
+      host = new DCCMCPHost();
+    } catch (e) {
+      return [];
+    }
+
+    const tools = host.getAllTools();
+    if (!tools || tools.length === 0) return [];
+    return tools.map((tool) => `@@dcc_${tool.namespacedName}`);
+  }
+
+  /**
+   * Convert a DCC tool (by its namespaced name) to an Aibitat-compatible plugin.
+   * Follows the same pattern as convertServerToolsToPlugins().
+   * @param {string} namespacedToolName - e.g., "blender.create_mesh"
+   * @param {Object} _aibitat - The aibitat object (unused, kept for pattern consistency)
+   * @returns {{name: string, description: string, plugin: Function, toolName: string}|null}
+   */
+  convertDCCToolToPlugin(namespacedToolName, _aibitat = null) {
+    let DCCMCPHost;
+    try {
+      DCCMCPHost = require("../DCCHost");
+    } catch (e) {
+      return null;
+    }
+
+    let host;
+    try {
+      host = new DCCMCPHost();
+    } catch (e) {
+      return null;
+    }
+
+    const allTools = host.getAllTools();
+    const tool = allTools.find((t) => t.namespacedName === namespacedToolName);
+    if (!tool) return null;
+
+    const pluginName = `dcc-${tool.namespacedName}`;
+
+    return {
+      name: pluginName,
+      description: tool.description || `DCC tool: ${tool.namespacedName}`,
+      plugin: function () {
+        return {
+          name: pluginName,
+          setup: (aibitat) => {
+            aibitat.function({
+              super: aibitat,
+              name: pluginName,
+              controller: new AbortController(),
+              description:
+                tool.description || `DCC tool: ${tool.namespacedName}`,
+              isDCCTool: true,
+              examples: [],
+              parameters: {
+                $schema: "http://json-schema.org/draft-07/schema#",
+                ...tool.inputSchema,
+              },
+              handler: async function (args = {}) {
+                try {
+                  const DCCMCPHostInner = require("../DCCHost");
+                  const hostInner = new DCCMCPHostInner();
+
+                  aibitat.handlerProps.log(
+                    `Executing DCC tool: ${tool.namespacedName} with args:`,
+                    args
+                  );
+                  aibitat.introspect(
+                    `Executing DCC tool: ${tool.connectionName} (${tool.appType}) → ${tool.name} with ${JSON.stringify(args, null, 2)}`
+                  );
+
+                  const result = await hostInner.callTool(
+                    tool.namespacedName,
+                    args
+                  );
+
+                  if (!result.success) {
+                    throw new Error(
+                      result.error || "DCC tool call returned failure"
+                    );
+                  }
+
+                  aibitat.handlerProps.log(
+                    `DCC tool: ${tool.namespacedName} completed successfully`,
+                    result.result
+                  );
+                  aibitat.introspect(
+                    `DCC tool: ${tool.namespacedName} completed successfully`
+                  );
+                  return MCPCompatibilityLayer.returnMCPResult(result.result);
+                } catch (error) {
+                  aibitat.handlerProps.log(
+                    `DCC tool: ${tool.namespacedName} failed with error:`,
+                    error
+                  );
+                  aibitat.introspect(
+                    `DCC tool: ${tool.namespacedName} failed with error:`,
+                    error
+                  );
+                  return `The tool ${tool.namespacedName} failed with error: ${error?.message || "An unknown error occurred"}`;
+                }
+              },
+            });
+          },
+        };
+      },
+      toolName: tool.namespacedName,
+    };
+  }
+
   static returnMCPResult(result) {
     if (typeof result !== "object" || result === null) return String(result);
 
