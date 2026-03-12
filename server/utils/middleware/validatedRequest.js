@@ -2,9 +2,36 @@ const { SystemSettings } = require("../../models/systemSettings");
 const { User } = require("../../models/user");
 const { EncryptionManager } = require("../EncryptionManager");
 const { decodeJWT } = require("../http");
+const {
+  isClerkEnabled,
+  validateClerkSession,
+} = require("./clerkAuth");
 const EncryptionMgr = new EncryptionManager();
 
 async function validatedRequest(request, response, next) {
+  // Priority: If Clerk is enabled, try to authenticate via Clerk first.
+  // If Clerk auth succeeds, sync user to local DB and proceed.
+  // If Clerk auth fails or is not enabled, fall through to existing JWT/API key validation.
+  if (isClerkEnabled()) {
+    const clerkUserId = await validateClerkSession(request);
+    if (clerkUserId) {
+      const user = await User.syncFromClerk(clerkUserId);
+      if (user) {
+        if (user.suspended) {
+          response
+            .status(401)
+            .json({ error: "User is suspended from system" });
+          return;
+        }
+        response.locals.user = User.filterFields(user);
+        response.locals.multiUserMode = true;
+        next();
+        return;
+      }
+    }
+    // Fall through to standard auth if Clerk session is not present
+  }
+
   const multiUserMode = await SystemSettings.isMultiUserMode();
   response.locals.multiUserMode = multiUserMode;
   if (multiUserMode)
