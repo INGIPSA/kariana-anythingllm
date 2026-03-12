@@ -29,6 +29,8 @@ const { communityHubEndpoints } = require("./endpoints/communityHub");
 const { agentFlowEndpoints } = require("./endpoints/agentFlows");
 const { mcpServersEndpoints } = require("./endpoints/mcpServers");
 const { dccConnectionEndpoints } = require("./endpoints/dccConnections");
+const { clerkWebhookEndpoints } = require("./endpoints/clerkWebhook");
+const { stripeEndpoints } = require("./endpoints/stripe");
 const { mobileEndpoints } = require("./endpoints/mobile");
 const { webPushEndpoints } = require("./endpoints/webPush");
 const { projectEndpoints } = require("./endpoints/projects");
@@ -49,22 +51,6 @@ if (
   );
 }
 app.use(cors({ origin: true }));
-
-// Clerk authentication middleware (optional — only active if CLERK_SECRET_KEY and CLERK_PUBLISHABLE_KEY are set)
-const {
-  isClerkEnabled,
-  getClerkMiddleware,
-} = require("./utils/middleware/clerkAuth");
-if (isClerkEnabled()) {
-  const clerkMw = getClerkMiddleware();
-  if (clerkMw) {
-    app.use(clerkMw);
-    console.log("[Auth] Clerk authentication enabled");
-  }
-} else {
-  console.log("[Auth] Using default JWT authentication");
-}
-
 app.use(bodyParser.text({ limit: FILE_LIMIT }));
 app.use(bodyParser.json({ limit: FILE_LIMIT }));
 app.use(
@@ -101,6 +87,8 @@ dccConnectionEndpoints(apiRouter);
 mobileEndpoints(apiRouter);
 webPushEndpoints(apiRouter);
 projectEndpoints(apiRouter);
+clerkWebhookEndpoints(apiRouter);
+stripeEndpoints(apiRouter);
 // Externally facing embedder endpoints
 embeddedEndpoints(apiRouter);
 
