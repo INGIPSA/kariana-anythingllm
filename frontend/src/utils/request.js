@@ -9,10 +9,7 @@ export function userFromStorage() {
 }
 
 export function baseHeaders(providedToken = null) {
-  // Priority: provided token > Clerk session token > stored JWT token
-  const clerkToken = window.localStorage.getItem("kariana_clerk_token");
-  const token =
-    providedToken || clerkToken || window.localStorage.getItem(AUTH_TOKEN);
+  const token = providedToken || window.localStorage.getItem(AUTH_TOKEN);
   return {
     Authorization: token ? `Bearer ${token}` : null,
   };

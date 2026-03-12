@@ -15,8 +15,8 @@ function clerkWebhookEndpoints(app) {
       return response.status(500).json({ error: "Webhook secret not configured" });
     }
 
-    // Get the raw body for verification
-    const payload = JSON.stringify(request.body);
+    // Use the raw body buffer for webhook signature verification
+    const payload = request.rawBody || JSON.stringify(request.body);
     const headers = {
       "svix-id": request.headers["svix-id"],
       "svix-timestamp": request.headers["svix-timestamp"],

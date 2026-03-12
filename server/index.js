@@ -52,7 +52,15 @@ if (
 }
 app.use(cors({ origin: true }));
 app.use(bodyParser.text({ limit: FILE_LIMIT }));
-app.use(bodyParser.json({ limit: FILE_LIMIT }));
+app.use(
+  bodyParser.json({
+    limit: FILE_LIMIT,
+    // Preserve raw body for webhook signature verification (Stripe, Clerk/Svix)
+    verify: (req, _res, buf) => {
+      req.rawBody = buf;
+    },
+  })
+);
 app.use(
   bodyParser.urlencoded({
     limit: FILE_LIMIT,

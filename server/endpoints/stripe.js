@@ -237,8 +237,8 @@ function stripeEndpoints(app) {
     let event;
     try {
       if (webhookSecret && sig) {
-        // In production, verify the webhook signature
-        const rawBody = JSON.stringify(request.body);
+        // In production, verify the webhook signature using the raw request body
+        const rawBody = request.rawBody || JSON.stringify(request.body);
         event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
       } else {
         // In development without webhook secret, trust the payload
