@@ -170,6 +170,9 @@ export default {
     mobileConnections: () => {
       return `/settings/mobile-connections`;
     },
+    dccConnections: () => {
+      return `/settings/dcc-connections`;
+    },
   },
   agents: {
     builder: () => {

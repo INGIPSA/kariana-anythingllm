@@ -372,6 +372,15 @@ const router = createBrowserRouter([
           return { element: <ManagerRoute Component={MobileConnections} /> };
         },
       },
+      {
+        path: "/settings/dcc-connections",
+        lazy: async () => {
+          const { default: DCCConnections } = await import(
+            "@/pages/GeneralSettings/DCCConnections"
+          );
+          return { element: <AdminRoute Component={DCCConnections} /> };
+        },
+      },
       // Catch-all route for 404s
       {
         path: "*",
