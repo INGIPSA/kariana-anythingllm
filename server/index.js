@@ -29,7 +29,7 @@ const { communityHubEndpoints } = require("./endpoints/communityHub");
 const { agentFlowEndpoints } = require("./endpoints/agentFlows");
 const { mcpServersEndpoints } = require("./endpoints/mcpServers");
 const { dccConnectionEndpoints } = require("./endpoints/dccConnections");
-const { clerkWebhookEndpoints } = require("./endpoints/clerkWebhook");
+const { clerkWebhookEndpoints, cliAuthEndpoints } = require("./endpoints/clerkWebhook");
 const { stripeEndpoints } = require("./endpoints/stripe");
 const { mobileEndpoints } = require("./endpoints/mobile");
 const { webPushEndpoints } = require("./endpoints/webPush");
@@ -96,6 +96,7 @@ mobileEndpoints(apiRouter);
 webPushEndpoints(apiRouter);
 projectEndpoints(apiRouter);
 clerkWebhookEndpoints(apiRouter);
+cliAuthEndpoints(apiRouter);
 stripeEndpoints(apiRouter);
 // Externally facing embedder endpoints
 embeddedEndpoints(apiRouter);
