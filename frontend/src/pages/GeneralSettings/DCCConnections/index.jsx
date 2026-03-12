@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Sidebar from "@/components/SettingsSidebar";
 import * as Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -9,20 +9,40 @@ import DCCConnectionCard from "./DCCConnectionCard";
 import NewConnectionModal from "./NewConnectionModal";
 import { isMobile } from "react-device-detect";
 
+const STATUS_POLL_INTERVAL = 10_000; // 10 seconds
+
 export default function DCCConnections() {
   const [loading, setLoading] = useState(true);
   const [connections, setConnections] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingConnection, setEditingConnection] = useState(null);
+  const pollRef = useRef(null);
 
-  const fetchConnections = async () => {
-    const found = await DCCConnection.getAll();
-    setConnections(found);
-  };
+  const fetchStatus = useCallback(async () => {
+    try {
+      const statusList = await DCCConnection.status();
+      if (statusList.length > 0) {
+        setConnections(statusList);
+      } else {
+        // Fall back to basic list if status endpoint has no results
+        const found = await DCCConnection.getAll();
+        setConnections(found);
+      }
+    } catch {
+      const found = await DCCConnection.getAll();
+      setConnections(found);
+    }
+  }, []);
 
   useEffect(() => {
-    fetchConnections().finally(() => setLoading(false));
-  }, []);
+    fetchStatus().finally(() => setLoading(false));
+
+    // Poll for live status every 10s
+    pollRef.current = setInterval(fetchStatus, STATUS_POLL_INTERVAL);
+    return () => {
+      if (pollRef.current) clearInterval(pollRef.current);
+    };
+  }, [fetchStatus]);
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this connection?"))
@@ -45,7 +65,7 @@ export default function DCCConnections() {
 
   const handleSaved = () => {
     handleCloseModal();
-    fetchConnections();
+    fetchStatus();
   };
 
   return (
@@ -104,6 +124,7 @@ export default function DCCConnections() {
                     connection={connection}
                     onEdit={handleEdit}
                     onDelete={handleDelete}
+                    onStatusChange={fetchStatus}
                   />
                 ))}
               </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import DCCConnection from "@/models/dccConnection";
 import paths from "@/utils/paths";
@@ -12,13 +12,34 @@ const APP_TYPE_COLORS = {
   godot: "#478CBF",
 };
 
+const STATUS_POLL_INTERVAL = 10_000; // 10 seconds
+
 export default function DCCConnectionsList() {
   const [connections, setConnections] = useState([]);
+  const pollRef = useRef(null);
+
+  const fetchStatus = async () => {
+    try {
+      const statusList = await DCCConnection.status();
+      if (statusList.length > 0) {
+        setConnections(statusList);
+      } else {
+        const found = await DCCConnection.getAll();
+        setConnections(found);
+      }
+    } catch {
+      DCCConnection.getAll()
+        .then((found) => setConnections(found))
+        .catch(() => setConnections([]));
+    }
+  };
 
   useEffect(() => {
-    DCCConnection.getAll()
-      .then((found) => setConnections(found))
-      .catch(() => setConnections([]));
+    fetchStatus();
+    pollRef.current = setInterval(fetchStatus, STATUS_POLL_INTERVAL);
+    return () => {
+      if (pollRef.current) clearInterval(pollRef.current);
+    };
   }, []);
 
   if (connections.length === 0) return null;
@@ -30,24 +51,37 @@ export default function DCCConnectionsList() {
           DCC Connections
         </p>
       </div>
-      {connections.map((connection) => (
-        <Link
-          key={connection.id}
-          to={paths.settings.dccConnections()}
-          className="flex items-center gap-x-2 px-2 py-1.5 rounded-lg hover:bg-theme-action-menu-item-hover transition-colors group"
-        >
-          <div
-            className="w-2 h-2 rounded-full shrink-0"
-            style={{
-              backgroundColor:
-                APP_TYPE_COLORS[connection.appType] || "#6B7280",
-            }}
-          />
-          <p className="text-theme-text-secondary group-hover:text-white text-xs truncate">
-            {connection.name}
-          </p>
-        </Link>
-      ))}
+      {connections.map((connection) => {
+        const isConnected = connection.connected || false;
+        const toolCount = connection.toolCount || 0;
+
+        return (
+          <Link
+            key={connection.id}
+            to={paths.settings.dccConnections()}
+            className="flex items-center gap-x-2 px-2 py-1.5 rounded-lg hover:bg-theme-action-menu-item-hover transition-colors group"
+          >
+            <div
+              className={`w-2 h-2 rounded-full shrink-0 ${
+                isConnected ? "animate-pulse" : ""
+              }`}
+              style={{
+                backgroundColor: isConnected
+                  ? "#22C55E"
+                  : APP_TYPE_COLORS[connection.appType] || "#6B7280",
+              }}
+            />
+            <p className="text-theme-text-secondary group-hover:text-white text-xs truncate">
+              {connection.name}
+            </p>
+            {isConnected && toolCount > 0 && (
+              <span className="ml-auto text-[9px] text-theme-text-secondary bg-white/5 px-1 py-0.5 rounded shrink-0">
+                {toolCount}
+              </span>
+            )}
+          </Link>
+        );
+      })}
     </div>
   );
 }

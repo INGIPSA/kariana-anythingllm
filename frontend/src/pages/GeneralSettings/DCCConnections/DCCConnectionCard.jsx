@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { PencilSimple, Trash, Lightning } from "@phosphor-icons/react";
+import {
+  PencilSimple,
+  Trash,
+  Lightning,
+  Plug,
+  PlugsConnected,
+  CaretDown,
+  CaretUp,
+  Wrench,
+} from "@phosphor-icons/react";
 import DCCConnection from "@/models/dccConnection";
 
 const APP_TYPE_CONFIG = {
@@ -15,9 +24,17 @@ export default function DCCConnectionCard({
   connection,
   onEdit,
   onDelete,
+  onStatusChange,
 }) {
   const [testing, setTesting] = useState(false);
   const [testResult, setTestResult] = useState(null);
+  const [connecting, setConnecting] = useState(false);
+  const [showTools, setShowTools] = useState(false);
+  const [tools, setTools] = useState([]);
+  const [loadingTools, setLoadingTools] = useState(false);
+
+  const isConnected = connection.connected || false;
+  const toolCount = connection.toolCount || 0;
 
   const config = APP_TYPE_CONFIG[connection.appType] || {
     label: "??",
@@ -32,6 +49,38 @@ export default function DCCConnectionCard({
     setTestResult(result);
     setTesting(false);
     setTimeout(() => setTestResult(null), 5000);
+  };
+
+  const handleToggleConnect = async () => {
+    setConnecting(true);
+    try {
+      if (isConnected) {
+        await DCCConnection.disconnect(connection.id);
+      } else {
+        await DCCConnection.connect(connection.id);
+      }
+      if (onStatusChange) onStatusChange();
+    } catch (e) {
+      console.error("Connection toggle failed:", e);
+    }
+    setConnecting(false);
+  };
+
+  const handleToggleTools = async () => {
+    if (!showTools && isConnected && tools.length === 0) {
+      setLoadingTools(true);
+      try {
+        const allTools = await DCCConnection.tools();
+        const myTools = allTools.filter(
+          (t) => t.connectionId === connection.id
+        );
+        setTools(myTools);
+      } catch {
+        setTools([]);
+      }
+      setLoadingTools(false);
+    }
+    setShowTools(!showTools);
   };
 
   return (
@@ -51,11 +100,20 @@ export default function DCCConnectionCard({
             {config.name}
           </p>
         </div>
-        <div className="ml-auto flex items-center gap-x-1 shrink-0">
+        <div className="ml-auto flex items-center gap-x-2 shrink-0">
+          {isConnected && toolCount > 0 && (
+            <span className="text-[10px] font-medium text-theme-text-secondary bg-white/5 px-1.5 py-0.5 rounded">
+              {toolCount} tool{toolCount !== 1 ? "s" : ""}
+            </span>
+          )}
           <div
-            className="w-2.5 h-2.5 rounded-full"
-            style={{ backgroundColor: "#6B7280" }}
-            title="Status unknown"
+            className={`w-2.5 h-2.5 rounded-full ${
+              isConnected ? "animate-pulse" : ""
+            }`}
+            style={{
+              backgroundColor: isConnected ? "#22C55E" : "#6B7280",
+            }}
+            title={isConnected ? "Connected" : "Disconnected"}
           />
         </div>
       </div>
@@ -87,6 +145,76 @@ export default function DCCConnectionCard({
           {testResult.success
             ? "Connection successful"
             : testResult.error || "Connection failed"}
+        </div>
+      )}
+
+      {/* Connect/Disconnect button */}
+      <button
+        onClick={handleToggleConnect}
+        disabled={connecting}
+        className={`flex items-center justify-center gap-x-1.5 text-xs font-medium py-1.5 px-3 rounded-lg transition-colors disabled:opacity-50 ${
+          isConnected
+            ? "bg-red-500/10 text-red-400 hover:bg-red-500/20"
+            : "bg-green-500/10 text-green-400 hover:bg-green-500/20"
+        }`}
+      >
+        {isConnected ? (
+          <>
+            <PlugsConnected className="h-3.5 w-3.5" weight="bold" />
+            {connecting ? "Disconnecting..." : "Disconnect"}
+          </>
+        ) : (
+          <>
+            <Plug className="h-3.5 w-3.5" weight="bold" />
+            {connecting ? "Connecting..." : "Connect"}
+          </>
+        )}
+      </button>
+
+      {/* Expandable tools section */}
+      {isConnected && toolCount > 0 && (
+        <div className="border-t border-white/10 pt-2">
+          <button
+            onClick={handleToggleTools}
+            className="flex items-center gap-x-1 text-xs text-theme-text-secondary hover:text-white transition-colors w-full"
+          >
+            <Wrench className="h-3 w-3" />
+            <span>Available Tools ({toolCount})</span>
+            {showTools ? (
+              <CaretUp className="h-3 w-3 ml-auto" />
+            ) : (
+              <CaretDown className="h-3 w-3 ml-auto" />
+            )}
+          </button>
+          {showTools && (
+            <div className="mt-2 max-h-40 overflow-y-auto flex flex-col gap-y-1">
+              {loadingTools ? (
+                <p className="text-theme-text-secondary text-[10px]">
+                  Loading tools...
+                </p>
+              ) : tools.length === 0 ? (
+                <p className="text-theme-text-secondary text-[10px]">
+                  No tools found.
+                </p>
+              ) : (
+                tools.map((tool) => (
+                  <div
+                    key={tool.namespacedName}
+                    className="bg-white/5 rounded px-2 py-1"
+                  >
+                    <p className="text-white text-[10px] font-mono truncate">
+                      {tool.namespacedName}
+                    </p>
+                    {tool.description && (
+                      <p className="text-theme-text-secondary text-[10px] truncate">
+                        {tool.description}
+                      </p>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+          )}
         </div>
       )}
 
