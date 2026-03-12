@@ -75,9 +75,7 @@ export default function Connections() {
     fetchStatus();
   };
 
-  const toggleMCP = async (serverName) => {
-    const result = await MCPServers.toggleServer(serverName);
-    if (!result.success) return;
+  const toggleMCP = (serverName) => {
     setMcpServers((prev) =>
       prev.map((s) =>
         s.name === serverName ? { ...s, running: !s.running } : s
