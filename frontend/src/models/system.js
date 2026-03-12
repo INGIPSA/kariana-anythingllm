@@ -7,11 +7,11 @@ import SystemPromptVariable from "./systemPromptVariable";
 
 const System = {
   cacheKeys: {
-    footerIcons: "anythingllm_footer_links",
-    supportEmail: "anythingllm_support_email",
-    customAppName: "anythingllm_custom_app_name",
-    canViewChatHistory: "anythingllm_can_view_chat_history",
-    deploymentVersion: "anythingllm_deployment_version",
+    footerIcons: "kariana_footer_links",
+    supportEmail: "kariana_support_email",
+    customAppName: "kariana_custom_app_name",
+    canViewChatHistory: "kariana_can_view_chat_history",
+    deploymentVersion: "kariana_deployment_version",
   },
   ping: async function () {
     return await fetch(`${API_BASE}/ping`)

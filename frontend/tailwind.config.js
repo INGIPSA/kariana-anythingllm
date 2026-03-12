@@ -21,31 +21,31 @@ export default {
         "360": "360deg"
       },
       colors: {
-        "black-900": "#141414",
-        accent: "#3D4147",
-        "sidebar-button": "#31353A",
-        sidebar: "#25272C",
-        "historical-msg-system": "rgba(255, 255, 255, 0.05);",
-        "historical-msg-user": "#2C2F35",
-        outline: "#4E5153",
+        "black-900": "#0b1120",
+        accent: "#1e2d42",
+        "sidebar-button": "#162033",
+        sidebar: "#0b1120",
+        "historical-msg-system": "rgba(99, 102, 241, 0.05);",
+        "historical-msg-user": "#1e2d42",
+        outline: "rgba(99, 102, 241, 0.3)",
         "primary-button": "var(--theme-button-primary)",
         "cta-button": "var(--theme-button-cta)",
-        secondary: "#2C2F36",
-        "dark-input": "#18181B",
-        "mobile-onboarding": "#2C2F35",
-        "dark-highlight": "#1C1E21",
-        "dark-text": "#222628",
-        description: "#D2D5DB",
-        "x-button": "#9CA3AF",
-        royalblue: "#065986",
-        purple: "#4A1FB8",
+        secondary: "#162033",
+        "dark-input": "#0f1729",
+        "mobile-onboarding": "#1e2d42",
+        "dark-highlight": "#162033",
+        "dark-text": "#0f1729",
+        description: "#cbd5e1",
+        "x-button": "#94a3b8",
+        royalblue: "#4338ca",
+        purple: "#6366f1",
         magenta: "#9E165F",
-        danger: "#F04438",
-        error: "#B42318",
-        warn: "#854708",
-        success: "#05603A",
-        darker: "#F4F4F4",
-        teal: "#0BA5EC",
+        danger: "#ef4444",
+        error: "#ef4444",
+        warn: "#f59e0b",
+        success: "#22c55e",
+        darker: "#f1f5f9",
+        teal: "#6366f1",
 
         // Generic theme colors
         theme: {
@@ -157,24 +157,24 @@ export default {
       },
       backgroundImage: {
         "preference-gradient":
-          "linear-gradient(180deg, #5A5C63 0%, rgba(90, 92, 99, 0.28) 100%);",
+          "linear-gradient(180deg, #1e2d42 0%, rgba(22, 32, 51, 0.28) 100%);",
         "chat-msg-user-gradient":
-          "linear-gradient(180deg, #3D4147 0%, #2C2F35 100%);",
+          "linear-gradient(180deg, #1e2d42 0%, #162033 100%);",
         "selected-preference-gradient":
-          "linear-gradient(180deg, #313236 0%, rgba(63.40, 64.90, 70.13, 0) 100%);",
-        "main-gradient": "linear-gradient(180deg, #3D4147 0%, #2C2F35 100%)",
-        "modal-gradient": "linear-gradient(180deg, #3D4147 0%, #2C2F35 100%)",
-        "sidebar-gradient": "linear-gradient(90deg, #5B616A 0%, #3F434B 100%)",
-        "login-gradient": "linear-gradient(180deg, #3D4147 0%, #2C2F35 100%)",
+          "linear-gradient(180deg, #162033 0%, rgba(15, 23, 41, 0) 100%);",
+        "main-gradient": "linear-gradient(180deg, #1e2d42 0%, #162033 100%)",
+        "modal-gradient": "linear-gradient(180deg, #1e2d42 0%, #162033 100%)",
+        "sidebar-gradient": "linear-gradient(90deg, #1e2d42 0%, #0b1120 100%)",
+        "login-gradient": "linear-gradient(180deg, #1e2d42 0%, #162033 100%)",
         "menu-item-gradient":
-          "linear-gradient(90deg, #3D4147 0%, #2C2F35 100%)",
+          "linear-gradient(90deg, #1e2d42 0%, #162033 100%)",
         "menu-item-selected-gradient":
-          "linear-gradient(90deg, #5B616A 0%, #3F434B 100%)",
+          "linear-gradient(90deg, #243a56 0%, #1e2d42 100%)",
         "workspace-item-gradient":
-          "linear-gradient(90deg, #3D4147 0%, #2C2F35 100%)",
+          "linear-gradient(90deg, #1e2d42 0%, #162033 100%)",
         "workspace-item-selected-gradient":
-          "linear-gradient(90deg, #5B616A 0%, #3F434B 100%)",
-        "switch-selected": "linear-gradient(146deg, #5B616A 0%, #3F434B 100%)"
+          "linear-gradient(90deg, #243a56 0%, #1e2d42 100%)",
+        "switch-selected": "linear-gradient(146deg, #243a56 0%, #1e2d42 100%)"
       },
       fontFamily: {
         sans: [
@@ -219,20 +219,20 @@ export default {
           "0%": {
             opacity: 1,
             transform: "scale(1)",
-            boxShadow: "0 0 0 rgba(255, 255, 255, 0.0)",
-            backgroundColor: "rgba(255, 255, 255, 0.0)"
+            boxShadow: "0 0 0 rgba(99, 102, 241, 0.0)",
+            backgroundColor: "rgba(99, 102, 241, 0.0)"
           },
           "50%": {
             opacity: 1,
             transform: "scale(1.1)",
-            boxShadow: "0 0 15px rgba(255, 255, 255, 0.2)",
-            backgroundColor: "rgba(255, 255, 255, 0.1)"
+            boxShadow: "0 0 15px rgba(99, 102, 241, 0.3)",
+            backgroundColor: "rgba(99, 102, 241, 0.1)"
           },
           "100%": {
             opacity: 1,
             transform: "scale(1)",
-            boxShadow: "0 0 0 rgba(255, 255, 255, 0.0)",
-            backgroundColor: "rgba(255, 255, 255, 0.0)"
+            boxShadow: "0 0 0 rgba(99, 102, 241, 0.0)",
+            backgroundColor: "rgba(99, 102, 241, 0.0)"
           }
         },
         'fade-in': {

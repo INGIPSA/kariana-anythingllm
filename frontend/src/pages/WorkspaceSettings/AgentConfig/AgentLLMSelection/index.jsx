@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import AnythingLLMIcon from "@/media/logo/anything-llm-icon.png";
+import KarianaIcon from "@/media/logo/kariana-icon.png";
 import AgentLLMItem from "./AgentLLMItem";
 import { AVAILABLE_LLM_PROVIDERS } from "@/pages/GeneralSettings/LLMPreference";
 import { CaretUpDown, Gauge, MagnifyingGlass, X } from "@phosphor-icons/react";
@@ -56,7 +56,7 @@ const WARN_PERFORMANCE = [
 const LLM_DEFAULT = {
   name: "System Default",
   value: "none",
-  logo: AnythingLLMIcon,
+  logo: KarianaIcon,
   options: () => <React.Fragment />,
   description:
     "Agents will use the workspace or system LLM unless otherwise specified.",

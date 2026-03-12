@@ -8,7 +8,7 @@ const TRANSLATIONS = {
     llm: {
       title: "LLMの設定",
       description:
-        "AnythingLLMは多くのLLMプロバイダーと連携できます。これがチャットを処理するサービスになります。",
+        "Karianaは多くのLLMプロバイダーと連携できます。これがチャットを処理するサービスになります。",
     },
     userSetup: {
       title: "ユーザー設定",
@@ -34,15 +34,15 @@ const TRANSLATIONS = {
       settingsHint: "これらの設定は、設定画面でいつでも再構成できます。",
     },
     survey: {
-      title: "AnythingLLMへようこそ",
+      title: "Karianaへようこそ",
       description:
-        "AnythingLLMをあなたのニーズに合わせて構築するためにご協力ください。任意です。",
+        "Karianaをあなたのニーズに合わせて構築するためにご協力ください。任意です。",
       email: "メールアドレスは何ですか？",
-      useCase: "AnythingLLMを何に使用しますか？",
+      useCase: "Karianaを何に使用しますか？",
       useCaseWork: "仕事用",
       useCasePersonal: "個人用",
       useCaseOther: "その他",
-      comment: "AnythingLLMをどのように知りましたか？",
+      comment: "Karianaをどのように知りましたか？",
       commentPlaceholder:
         "Reddit、Twitter、GitHub、YouTubeなど - どのように見つけたか教えてください！",
       skip: "アンケートをスキップ",
@@ -93,7 +93,7 @@ const TRANSLATIONS = {
     interface: "UI設定",
     branding: "ブランディングとホワイトレーベル化",
     chat: "チャット",
-    "mobile-app": "AnythingLLM モバイル版",
+    "mobile-app": "Kariana モバイル版",
     "community-hub": {
       title: "地域交流拠点",
       trending: "人気のあるものを探す",
@@ -146,7 +146,7 @@ const TRANSLATIONS = {
       add: "新しいメッセージを追加",
       save: "メッセージを保存",
       heading: "説明してください",
-      body: "AnythingLLMの利点",
+      body: "Karianaの利点",
     },
     delete: {
       title: "ワークスペースを削除",
@@ -330,7 +330,7 @@ const TRANSLATIONS = {
   api: {
     title: "APIキー",
     description:
-      "APIキーにより、プログラム経由でこのAnythingLLMインスタンスにアクセスおよび管理できます。",
+      "APIキーにより、プログラム経由でこのKarianaインスタンスにアクセスおよび管理できます。",
     link: "APIドキュメントを読む",
     generate: "新しいAPIキーを生成",
     table: {
@@ -342,7 +342,7 @@ const TRANSLATIONS = {
   llm: {
     title: "LLMの設定",
     description:
-      "これは、お好みのLLMチャットおよび埋め込みプロバイダー用の認証情報と設定です。これらのキーが最新かつ正確でない場合、AnythingLLMは正しく動作しません。",
+      "これは、お好みのLLMチャットおよび埋め込みプロバイダー用の認証情報と設定です。これらのキーが最新かつ正確でない場合、Karianaは正しく動作しません。",
     provider: "LLMプロバイダー",
     providers: {
       azure_openai: {
@@ -365,7 +365,7 @@ const TRANSLATIONS = {
       "これは、お好みの文字起こしモデルプロバイダー用の認証情報と設定です。これらのキーが最新かつ正確でない場合、メディアファイルや音声が正しく文字起こしされません。",
     provider: "文字起こしプロバイダー",
     "warn-start":
-      "RAMやCPUが限られたマシンでローカルのWhisperモデルを使用すると、メディアファイルの処理中にAnythingLLMが停止する可能性があります。",
+      "RAMやCPUが限られたマシンでローカルのWhisperモデルを使用すると、メディアファイルの処理中にKarianaが停止する可能性があります。",
     "warn-recommend":
       "少なくとも2GBのRAMが推奨され、ファイルサイズは10Mb未満であることをお勧めします。",
     "warn-end": "組み込みモデルは初回使用時に自動的にダウンロードされます。",
@@ -375,7 +375,7 @@ const TRANSLATIONS = {
     "desc-start":
       "LLMがネイティブに埋め込みエンジンをサポートしていない場合、テキストの埋め込み用に追加の認証情報を指定する必要がある場合があります。",
     "desc-end":
-      "埋め込みとは、テキストをベクトルに変換するプロセスです。これらの認証情報は、ファイルやプロンプトをAnythingLLMが処理できるフォーマットに変換するために必要です。",
+      "埋め込みとは、テキストをベクトルに変換するプロセスです。これらの認証情報は、ファイルやプロンプトをKarianaが処理できるフォーマットに変換するために必要です。",
     provider: {
       title: "埋め込みプロバイダー",
     },
@@ -399,7 +399,7 @@ const TRANSLATIONS = {
   vector: {
     title: "ベクターデータベース設定",
     description:
-      "これは、AnythingLLMインスタンスの動作方法用の認証情報と設定です。これらのキーが最新で正確であることが重要です。",
+      "これは、Karianaインスタンスの動作方法用の認証情報と設定です。これらのキーが最新で正確であることが重要です。",
     provider: {
       title: "ベクターデータベースプロバイダー",
       description: "LanceDBの場合、特に設定は必要ありません。",
@@ -444,7 +444,7 @@ const TRANSLATIONS = {
   privacy: {
     title: "プライバシーとデータ処理",
     description:
-      "これは、接続されているサードパーティプロバイダーとAnythingLLMがデータをどのように処理するかの設定です。",
+      "これは、接続されているサードパーティプロバイダーとKarianaがデータをどのように処理するかの設定です。",
     anonymous: "匿名テレメトリが有効",
   },
   connectors: {
@@ -600,12 +600,12 @@ const TRANSLATIONS = {
       fetching: "取得中...",
       "fetch-website": "ウェブサイトを取得",
       "privacy-notice":
-        "これらのファイルは、このAnythingLLMインスタンス上のドキュメント処理機能にアップロードされます。第三者に送信・共有されることはありません。",
+        "これらのファイルは、このKarianaインスタンス上のドキュメント処理機能にアップロードされます。第三者に送信・共有されることはありません。",
     },
     pinning: {
       what_pinning: "ドキュメントのピン留めとは？",
       pin_explained_block1:
-        "AnythingLLMでドキュメントを<b>ピン留め</b>すると、その内容全体がプロンプトウィンドウに挿入され、LLMがしっかり理解できるようになります。",
+        "Karianaでドキュメントを<b>ピン留め</b>すると、その内容全体がプロンプトウィンドウに挿入され、LLMがしっかり理解できるようになります。",
       pin_explained_block2:
         "<b>大きなコンテキストを持つモデル</b>や、重要な小さなファイルで特に効果的です。",
       pin_explained_block3:
@@ -615,7 +615,7 @@ const TRANSLATIONS = {
     watching: {
       what_watching: "ドキュメントのウォッチとは？",
       watch_explained_block1:
-        "AnythingLLMでドキュメントを<b>ウォッチ</b>すると、元のソースから定期的に内容が<i>自動的に</i>同期されます。管理しているすべてのワークスペースで内容が自動更新されます。",
+        "Karianaでドキュメントを<b>ウォッチ</b>すると、元のソースから定期的に内容が<i>自動的に</i>同期されます。管理しているすべてのワークスペースで内容が自動更新されます。",
       watch_explained_block2:
         "この機能は現在オンラインベースのコンテンツのみ対応しており、手動アップロードしたドキュメントには利用できません。",
       watch_explained_block3_start: "ウォッチしているドキュメントの管理は",
@@ -733,16 +733,16 @@ const TRANSLATIONS = {
   customization: {
     interface: {
       title: "UI設定",
-      description: "AnythingLLM の UI 設定を調整してください。",
+      description: "Kariana の UI 設定を調整してください。",
     },
     branding: {
       title: "ブランディングとホワイトレーベル化",
       description:
-        "AnythingLLMインスタンスを、独自のブランドでカスタマイズしてください。",
+        "Karianaインスタンスを、独自のブランドでカスタマイズしてください。",
     },
     chat: {
       title: "チャット",
-      description: "AnythingLLM のチャット設定をカスタマイズしてください。",
+      description: "Kariana のチャット設定をカスタマイズしてください。",
       auto_submit: {
         title: "自動音声入力送信",
         description: "沈黙の後に自動で音声入力を行う",
@@ -780,7 +780,7 @@ const TRANSLATIONS = {
       "display-language": {
         title: "表示言語",
         description:
-          "AnythingLLMのUIを特定の言語で表示するためのオプションを選択してください。翻訳が利用可能な場合にのみ有効です。",
+          "KarianaのUIを特定の言語で表示するためのオプションを選択してください。翻訳が利用可能な場合にのみ有効です。",
       },
       logo: {
         title: "ブランドロゴ",
@@ -914,7 +914,7 @@ const TRANSLATIONS = {
         unauthenticated: {
           title: "本人確認が必要です。",
           description:
-            "アイテムを公開する前に、AnythingLLMコミュニティハブで認証する必要があります。",
+            "アイテムを公開する前に、Karianaコミュニティハブで認証する必要があります。",
           button: "コミュニティハブへの接続",
         },
       },
@@ -969,7 +969,7 @@ const TRANSLATIONS = {
     password: {
       title: "パスワード保護",
       description:
-        "AnythingLLMインスタンスをパスワードで保護します。これを忘れた場合、回復方法はないため、このパスワードを必ず保存してください。",
+        "Karianaインスタンスをパスワードで保護します。これを忘れた場合、回復方法はないため、このパスワードを必ず保存してください。",
       "password-label": "インスタンスパスワード",
     },
   },

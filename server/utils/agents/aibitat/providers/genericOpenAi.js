@@ -5,7 +5,7 @@ const UnTooled = require("./helpers/untooled.js");
 const { tooledStream, tooledComplete } = require("./helpers/tooled.js");
 const { RetryError } = require("../error.js");
 const { toValidNumber } = require("../../../http/index.js");
-const { getAnythingLLMUserAgent } = require("../../../../endpoints/utils");
+const { getKarianaUserAgent } = require("../../../../endpoints/utils");
 const { GenericOpenAiLLM } = require("../../../AiProviders/genericOpenAi");
 
 /**
@@ -25,7 +25,7 @@ class GenericOpenAiProvider extends InheritMultiple([Provider, UnTooled]) {
       apiKey: process.env.GENERIC_OPEN_AI_API_KEY ?? null,
       maxRetries: 3,
       defaultHeaders: {
-        "User-Agent": getAnythingLLMUserAgent(),
+        "User-Agent": getKarianaUserAgent(),
         ...GenericOpenAiLLM.parseCustomHeaders(),
       },
     });

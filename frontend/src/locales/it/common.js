@@ -3,18 +3,18 @@ const TRANSLATIONS = {
   onboarding: {
     survey: {
       email: "Qual è il tuo indirizzo email?",
-      useCase: "Quali utilizzi intende fare con AnythingLLM?",
+      useCase: "Quali utilizzi intende fare con Kariana?",
       useCaseWork: "Per lavoro",
       useCasePersonal: "Per uso personale",
       useCaseOther: "Altro",
-      comment: "Come ha saputo di AnythingLLM?",
+      comment: "Come ha saputo di Kariana?",
       commentPlaceholder:
         "Reddit, Twitter, GitHub, YouTube, ecc. – Fateci sapere come ci avete trovato!",
       skip: "Salta la domanda",
       thankYou: "Grazie per il tuo feedback.",
-      title: "Benvenuti in AnythingLLM",
+      title: "Benvenuti in Kariana",
       description:
-        "Aiutaci a sviluppare AnythingLLM in base alle tue esigenze. Facoltativo.",
+        "Aiutaci a sviluppare Kariana in base alle tue esigenze. Facoltativo.",
     },
     home: {
       title: "Benvenuti a",
@@ -23,7 +23,7 @@ const TRANSLATIONS = {
     llm: {
       title: "Preferenza per i modelli LLM",
       description:
-        "AnythingLLM può collaborare con numerosi fornitori di modelli linguistici. Questo sarà il servizio che gestirà le conversazioni.",
+        "Kariana può collaborare con numerosi fornitori di modelli linguistici. Questo sarà il servizio che gestirà le conversazioni.",
     },
     userSetup: {
       title: "Configurazione dell'utente",
@@ -95,7 +95,7 @@ const TRANSLATIONS = {
     interface: "Preferenze dell'interfaccia utente",
     branding: "Branding e personalizzazione",
     chat: "Chat",
-    "mobile-app": "AnythingLLM Mobile",
+    "mobile-app": "Kariana Mobile",
     "community-hub": {
       title: "Punto di riferimento della comunità",
       trending: "Esplora le tendenze",
@@ -149,7 +149,7 @@ const TRANSLATIONS = {
       add: "Aggiungi un nuovo messaggio",
       save: "Salva messaggi",
       heading: "Spiegami",
-      body: "i vantaggi di AnythingLLM",
+      body: "i vantaggi di Kariana",
     },
     delete: {
       title: "Elimina area di lavoro",
@@ -338,7 +338,7 @@ const TRANSLATIONS = {
   api: {
     title: "Chiavi API",
     description:
-      "Le chiavi API consentono al titolare di accedere e gestire in modo programmatico questa istanza AnythingLLM.",
+      "Le chiavi API consentono al titolare di accedere e gestire in modo programmatico questa istanza Kariana.",
     link: "Leggi la documentazione API",
     generate: "Genera nuova chiave API",
     table: {
@@ -350,7 +350,7 @@ const TRANSLATIONS = {
   llm: {
     title: "Preferenza LLM",
     description:
-      "Queste sono le credenziali e le impostazioni per il tuo provider di chat e embedding LLM preferito. È importante che queste chiavi siano aggiornate e corrette, altrimenti AnythingLLM non funzionerà correttamente.",
+      "Queste sono le credenziali e le impostazioni per il tuo provider di chat e embedding LLM preferito. È importante che queste chiavi siano aggiornate e corrette, altrimenti Kariana non funzionerà correttamente.",
     provider: "Provider LLM",
     providers: {
       azure_openai: {
@@ -372,7 +372,7 @@ const TRANSLATIONS = {
       "Queste sono le credenziali e le impostazioni per il tuo fornitore di modelli di trascrizione preferito. È importante che queste chiavi siano aggiornate e corrette, altrimenti i file multimediali e l'audio non verranno trascritti.",
     provider: "Provider di trascrizione",
     "warn-start":
-      "L'utilizzo del modello whisper locale su macchine con RAM o CPU limitate può bloccare AnythingLLM durante l'elaborazione di file multimediali.",
+      "L'utilizzo del modello whisper locale su macchine con RAM o CPU limitate può bloccare Kariana durante l'elaborazione di file multimediali.",
     "warn-recommend":
       "Si consigliano almeno 2 GB di RAM e caricare file <10 Mb.",
     "warn-end":
@@ -383,7 +383,7 @@ const TRANSLATIONS = {
     "desc-start":
       "Quando si utilizza un LLM che non supporta nativamente un motore di embedding, potrebbe essere necessario specificare credenziali aggiuntive per l'embedding del testo.",
     "desc-end":
-      "L'embedding è il processo di trasformazione del testo in vettori. Queste credenziali sono necessarie per trasformare i file e i prompt in un formato che AnythingLLM può utilizzare per l'elaborazione.",
+      "L'embedding è il processo di trasformazione del testo in vettori. Queste credenziali sono necessarie per trasformare i file e i prompt in un formato che Kariana può utilizzare per l'elaborazione.",
     provider: {
       title: "Provider di embedding",
     },
@@ -409,7 +409,7 @@ const TRANSLATIONS = {
   vector: {
     title: "Database vettoriale",
     description:
-      "Queste sono le credenziali e le impostazioni per il funzionamento della tua istanza AnythingLLM. È importante che queste chiavi siano aggiornate e corrette.",
+      "Queste sono le credenziali e le impostazioni per il funzionamento della tua istanza Kariana. È importante che queste chiavi siano aggiornate e corrette.",
     provider: {
       title: "Provider del database vettoriale",
       description: "Non è richiesta alcuna configurazione per LanceDB.",
@@ -454,7 +454,7 @@ const TRANSLATIONS = {
   privacy: {
     title: "Privacy e gestione dei dati",
     description:
-      "Questa è la tua configurazione per il modo in cui i provider terzi connessi e AnythingLLM gestiscono i tuoi dati.",
+      "Questa è la tua configurazione per il modo in cui i provider terzi connessi e Kariana gestiscono i tuoi dati.",
     anonymous: "Telemetria anonima abilitata",
   },
   connectors: {
@@ -613,22 +613,22 @@ const TRANSLATIONS = {
       fetching: "Caricamento...",
       "fetch-website": "Recupera il sito web",
       "privacy-notice":
-        "Questi file verranno caricati nel processore di documenti in esecuzione su questa istanza di AnythingLLM. Questi file non vengono inviati o condivisi con terzi.",
+        "Questi file verranno caricati nel processore di documenti in esecuzione su questa istanza di Kariana. Questi file non vengono inviati o condivisi con terzi.",
     },
     pinning: {
       what_pinning: 'Cos\'è il "pinning" di un documento?',
       pin_explained_block1:
-        'Quando si "fissa" un documento in AnythingLLM, caricheremo l\'intero contenuto del documento nella finestra di prompt per il tuo modello linguistico, in modo che possa comprenderlo appieno.',
+        'Quando si "fissa" un documento in Kariana, caricheremo l\'intero contenuto del documento nella finestra di prompt per il tuo modello linguistico, in modo che possa comprenderlo appieno.',
       pin_explained_block2:
         "Questo funziona meglio con i modelli che gestiscono **ampie quantità di dati** o con file di piccole dimensioni che sono fondamentali per la loro base di conoscenza.",
       pin_explained_block3:
-        'Se non ottenete le risposte desiderate da AnythingLLM per impostazione predefinita, allora l\'utilizzo del "pinning" è un ottimo modo per ottenere risposte di qualità superiore in pochi clic.',
+        'Se non ottenete le risposte desiderate da Kariana per impostazione predefinita, allora l\'utilizzo del "pinning" è un ottimo modo per ottenere risposte di qualità superiore in pochi clic.',
       accept: "Ok, ho capito.",
     },
     watching: {
       what_watching: "Cosa si ottiene guardando un documentario?",
       watch_explained_block1:
-        "Quando visualizzi un documento in AnythingLLM, il sistema <i>sincronizzerà automaticamente</i> il contenuto del documento dalla sua fonte originale a intervalli regolari. Ciò aggiornerà automaticamente il contenuto in tutti gli spazi di lavoro in cui questo file è gestito.",
+        "Quando visualizzi un documento in Kariana, il sistema <i>sincronizzerà automaticamente</i> il contenuto del documento dalla sua fonte originale a intervalli regolari. Ciò aggiornerà automaticamente il contenuto in tutti gli spazi di lavoro in cui questo file è gestito.",
       watch_explained_block2:
         "Questa funzionalità supporta attualmente i contenuti basati su internet e non sarà disponibile per i documenti caricati manualmente.",
       watch_explained_block3_start:
@@ -754,16 +754,16 @@ const TRANSLATIONS = {
     interface: {
       title: "Preferenze dell'interfaccia utente",
       description:
-        "Configura le tue preferenze dell'interfaccia utente per AnythingLLM.",
+        "Configura le tue preferenze dell'interfaccia utente per Kariana.",
     },
     branding: {
       title: "Branding e personalizzazione",
       description:
-        "Personalizza la tua istanza di AnythingLLM con il tuo marchio.",
+        "Personalizza la tua istanza di Kariana con il tuo marchio.",
     },
     chat: {
       title: "Chat",
-      description: "Configura le tue preferenze di chat per AnythingLLM.",
+      description: "Configura le tue preferenze di chat per Kariana.",
       auto_submit: {
         title: "Inserimento automatico del testo della discorsione",
         description:
@@ -804,7 +804,7 @@ const TRANSLATIONS = {
       "display-language": {
         title: "Lingua da visualizzare",
         description:
-          "Seleziona la lingua preferita per visualizzare l'interfaccia utente di AnythingLLM – quando sono disponibili le traduzioni.",
+          "Seleziona la lingua preferita per visualizzare l'interfaccia utente di Kariana – quando sono disponibili le traduzioni.",
       },
       logo: {
         title: "Logo del marchio",
@@ -823,7 +823,7 @@ const TRANSLATIONS = {
         system: "sistema",
         user: "utente",
         message: "messaggio",
-        assistant: "AnythingLLM Chat Assistant",
+        assistant: "Kariana Chat Assistant",
         "double-click": "Fare doppio clic per modificare...",
         save: "Salva i messaggi",
       },
@@ -939,7 +939,7 @@ const TRANSLATIONS = {
         unauthenticated: {
           title: "Richiesta di autenticazione",
           description:
-            "È necessario autenticarsi tramite il Community Hub di AnythingLLM prima di pubblicare contenuti.",
+            "È necessario autenticarsi tramite il Community Hub di Kariana prima di pubblicare contenuti.",
           button: "Connettiti al centro comunitario",
         },
       },
@@ -992,7 +992,7 @@ const TRANSLATIONS = {
     password: {
       title: "Protezione password",
       description:
-        "Proteggi la tua istanza AnythingLLM con una password. Se la dimentichi, non esiste un metodo di recupero, quindi assicurati di salvare questa password.",
+        "Proteggi la tua istanza Kariana con una password. Se la dimentichi, non esiste un metodo di recupero, quindi assicurati di salvare questa password.",
       "password-label": "Password istanza",
     },
   },

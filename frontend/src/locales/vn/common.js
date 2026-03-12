@@ -3,18 +3,18 @@ const TRANSLATIONS = {
   onboarding: {
     survey: {
       email: "Email của bạn là gì?",
-      useCase: "Bạn sẽ sử dụng AnythingLLM để làm gì?",
+      useCase: "Bạn sẽ sử dụng Kariana để làm gì?",
       useCaseWork: "Cho công việc",
       useCasePersonal: "Cho mục đích cá nhân",
       useCaseOther: "Khác",
-      comment: "Bạn biết đến AnythingLLM như thế nào?",
+      comment: "Bạn biết đến Kariana như thế nào?",
       commentPlaceholder:
         "Reddit, Twitter, GitHub, YouTube, v.v. - Hãy cho chúng tôi biết bạn tìm thấy chúng tôi như thế nào!",
       skip: "Bỏ qua Khảo sát",
       thankYou: "Cảm ơn phản hồi của bạn!",
-      title: "Chào mừng đến với AnythingLLM",
+      title: "Chào mừng đến với Kariana",
       description:
-        "Giúp chúng tôi xây dựng AnythingLLM phù hợp với nhu cầu của bạn. Tùy chọn.",
+        "Giúp chúng tôi xây dựng Kariana phù hợp với nhu cầu của bạn. Tùy chọn.",
     },
     home: {
       title: "Chào mừng đến",
@@ -23,7 +23,7 @@ const TRANSLATIONS = {
     llm: {
       title: "Tùy chọn LLM",
       description:
-        "AnythingLLM có thể hoạt động với nhiều nhà cung cấp LLM. Đây sẽ là dịch vụ xử lý trò chuyện.",
+        "Kariana có thể hoạt động với nhiều nhà cung cấp LLM. Đây sẽ là dịch vụ xử lý trò chuyện.",
     },
     userSetup: {
       title: "Thiết lập Người dùng",
@@ -94,7 +94,7 @@ const TRANSLATIONS = {
     interface: "Tùy chọn Giao diện",
     branding: "Thương hiệu & Nhãn trắng",
     chat: "Trò chuyện",
-    "mobile-app": "AnythingLLM Di động",
+    "mobile-app": "Kariana Di động",
     "community-hub": {
       title: "Trung tâm cộng đồng",
       trending: "Khám phá các nội dung đang thịnh hành",
@@ -147,7 +147,7 @@ const TRANSLATIONS = {
       add: "Thêm tin nhắn mới",
       save: "Lưu Tin nhắn",
       heading: "Giải thích cho tôi",
-      body: "các lợi ích của AnythingLLM",
+      body: "các lợi ích của Kariana",
     },
     delete: {
       title: "Xóa không gian làm việc",
@@ -332,7 +332,7 @@ const TRANSLATIONS = {
   api: {
     title: "Khóa API",
     description:
-      "Khóa API cho phép người sở hữu truy cập và quản lý phiên bản AnythingLLM này theo chương trình.",
+      "Khóa API cho phép người sở hữu truy cập và quản lý phiên bản Kariana này theo chương trình.",
     link: "Đọc tài liệu API",
     generate: "Tạo Khóa API Mới",
     table: {
@@ -344,7 +344,7 @@ const TRANSLATIONS = {
   llm: {
     title: "Tùy chọn LLM",
     description:
-      "Đây là thông tin đăng nhập và cài đặt cho nhà cung cấp LLM trò chuyện & nhúng ưa thích của bạn. Điều quan trọng là các khóa này phải chính xác, nếu không AnythingLLM sẽ không hoạt động đúng.",
+      "Đây là thông tin đăng nhập và cài đặt cho nhà cung cấp LLM trò chuyện & nhúng ưa thích của bạn. Điều quan trọng là các khóa này phải chính xác, nếu không Kariana sẽ không hoạt động đúng.",
     provider: "Nhà cung cấp LLM",
     providers: {
       azure_openai: {
@@ -366,7 +366,7 @@ const TRANSLATIONS = {
       "Đây là thông tin đăng nhập và cài đặt cho nhà cung cấp mô hình chuyển đổi giọng nói ưa thích của bạn. Điều quan trọng là các khóa này phải chính xác, nếu không tệp media và âm thanh sẽ không được chuyển đổi.",
     provider: "Nhà cung cấp Chuyển đổi giọng nói",
     "warn-start":
-      "Sử dụng mô hình whisper cục bộ trên máy có RAM hoặc CPU hạn chế có thể làm AnythingLLM bị treo khi xử lý tệp media.",
+      "Sử dụng mô hình whisper cục bộ trên máy có RAM hoặc CPU hạn chế có thể làm Kariana bị treo khi xử lý tệp media.",
     "warn-recommend":
       "Chúng tôi khuyến nghị ít nhất 2GB RAM và tải lên tệp <10Mb.",
     "warn-end": "Mô hình tích hợp sẽ tự động tải xuống khi sử dụng lần đầu.",
@@ -376,7 +376,7 @@ const TRANSLATIONS = {
     "desc-start":
       "Khi sử dụng LLM không hỗ trợ bộ máy nhúng nguyên bản - bạn có thể cần chỉ định thêm thông tin đăng nhập để nhúng văn bản.",
     "desc-end":
-      "Nhúng là quá trình chuyển đổi văn bản thành vector. Thông tin đăng nhập này cần thiết để chuyển đổi tệp và prompt của bạn thành định dạng mà AnythingLLM có thể sử dụng để xử lý.",
+      "Nhúng là quá trình chuyển đổi văn bản thành vector. Thông tin đăng nhập này cần thiết để chuyển đổi tệp và prompt của bạn thành định dạng mà Kariana có thể sử dụng để xử lý.",
     provider: {
       title: "Nhà cung cấp Nhúng",
     },
@@ -402,7 +402,7 @@ const TRANSLATIONS = {
   vector: {
     title: "Cơ sở dữ liệu Vector",
     description:
-      "Đây là thông tin đăng nhập và cài đặt cho cách phiên bản AnythingLLM của bạn sẽ hoạt động. Điều quan trọng là các khóa này phải chính xác.",
+      "Đây là thông tin đăng nhập và cài đặt cho cách phiên bản Kariana của bạn sẽ hoạt động. Điều quan trọng là các khóa này phải chính xác.",
     provider: {
       title: "Nhà cung cấp Cơ sở dữ liệu Vector",
       description: "Không cần cấu hình cho LanceDB.",
@@ -447,7 +447,7 @@ const TRANSLATIONS = {
   privacy: {
     title: "Quyền riêng tư & Xử lý Dữ liệu",
     description:
-      "Đây là cấu hình của bạn về cách các nhà cung cấp bên thứ ba được kết nối và AnythingLLM xử lý dữ liệu của bạn.",
+      "Đây là cấu hình của bạn về cách các nhà cung cấp bên thứ ba được kết nối và Kariana xử lý dữ liệu của bạn.",
     anonymous: "Đã Bật Telemetry Ẩn danh",
   },
   connectors: {
@@ -604,22 +604,22 @@ const TRANSLATIONS = {
       fetching: "Đang lấy...",
       "fetch-website": "Lấy website",
       "privacy-notice":
-        "Các tệp này sẽ được tải lên trình xử lý tài liệu đang chạy trên phiên bản AnythingLLM này. Các tệp này không được gửi hoặc chia sẻ với bên thứ ba.",
+        "Các tệp này sẽ được tải lên trình xử lý tài liệu đang chạy trên phiên bản Kariana này. Các tệp này không được gửi hoặc chia sẻ với bên thứ ba.",
     },
     pinning: {
       what_pinning: "Ghim tài liệu là gì?",
       pin_explained_block1:
-        "Khi bạn <b>ghim</b> một tài liệu trong AnythingLLM, chúng tôi sẽ đưa toàn bộ nội dung của tài liệu vào cửa sổ prompt của bạn để LLM hiểu đầy đủ.",
+        "Khi bạn <b>ghim</b> một tài liệu trong Kariana, chúng tôi sẽ đưa toàn bộ nội dung của tài liệu vào cửa sổ prompt của bạn để LLM hiểu đầy đủ.",
       pin_explained_block2:
         "Điều này hoạt động tốt nhất với <b>mô hình ngữ cảnh lớn</b> hoặc các tệp nhỏ quan trọng với cơ sở kiến thức của nó.",
       pin_explained_block3:
-        "Nếu bạn không nhận được câu trả lời mong muốn từ AnythingLLM theo mặc định, ghim là một cách tuyệt vời để có được câu trả lời chất lượng cao hơn chỉ với một cú nhấp chuột.",
+        "Nếu bạn không nhận được câu trả lời mong muốn từ Kariana theo mặc định, ghim là một cách tuyệt vời để có được câu trả lời chất lượng cao hơn chỉ với một cú nhấp chuột.",
       accept: "Ok, tôi hiểu rồi",
     },
     watching: {
       what_watching: "Theo dõi tài liệu làm gì?",
       watch_explained_block1:
-        "Khi bạn <b>theo dõi</b> một tài liệu trong AnythingLLM, chúng tôi sẽ <i>tự động</i> đồng bộ nội dung tài liệu của bạn từ nguồn gốc theo các khoảng thời gian đều đặn. Điều này sẽ tự động cập nhật nội dung trong mọi không gian làm việc nơi tệp này được quản lý.",
+        "Khi bạn <b>theo dõi</b> một tài liệu trong Kariana, chúng tôi sẽ <i>tự động</i> đồng bộ nội dung tài liệu của bạn từ nguồn gốc theo các khoảng thời gian đều đặn. Điều này sẽ tự động cập nhật nội dung trong mọi không gian làm việc nơi tệp này được quản lý.",
       watch_explained_block2:
         "Tính năng này hiện chỉ hỗ trợ nội dung dựa trên trực tuyến và sẽ không khả dụng cho các tài liệu được tải lên thủ công.",
       watch_explained_block3_start:
@@ -736,16 +736,16 @@ const TRANSLATIONS = {
   customization: {
     interface: {
       title: "Tùy chọn Giao diện",
-      description: "Đặt tùy chọn giao diện của bạn cho AnythingLLM.",
+      description: "Đặt tùy chọn giao diện của bạn cho Kariana.",
     },
     branding: {
       title: "Thương hiệu & Nhãn trắng",
       description:
-        "Nhãn trắng phiên bản AnythingLLM của bạn với thương hiệu tùy chỉnh.",
+        "Nhãn trắng phiên bản Kariana của bạn với thương hiệu tùy chỉnh.",
     },
     chat: {
       title: "Trò chuyện",
-      description: "Đặt tùy chọn trò chuyện của bạn cho AnythingLLM.",
+      description: "Đặt tùy chọn trò chuyện của bạn cho Kariana.",
       auto_submit: {
         title: "Tự động Gửi Đầu vào Giọng nói",
         description:
@@ -783,7 +783,7 @@ const TRANSLATIONS = {
       "display-language": {
         title: "Ngôn ngữ Hiển thị",
         description:
-          "Chọn ngôn ngữ ưa thích để hiển thị giao diện người dùng của AnythingLLM - khi bản dịch có sẵn.",
+          "Chọn ngôn ngữ ưa thích để hiển thị giao diện người dùng của Kariana - khi bản dịch có sẵn.",
       },
       logo: {
         title: "Logo Thương hiệu",
@@ -802,7 +802,7 @@ const TRANSLATIONS = {
         system: "hệ thống",
         user: "người dùng",
         message: "tin nhắn",
-        assistant: "Trợ lý Trò chuyện AnythingLLM",
+        assistant: "Trợ lý Trò chuyện Kariana",
         "double-click": "Nhấp đúp để chỉnh sửa...",
         save: "Lưu Tin nhắn",
       },
@@ -940,7 +940,7 @@ const TRANSLATIONS = {
         unauthenticated: {
           title: "Yêu cầu Xác thực",
           description:
-            "Bạn cần xác thực với AnythingLLM Community Hub trước khi đăng các mục.",
+            "Bạn cần xác thực với Kariana Community Hub trước khi đăng các mục.",
           button: "Kết nối với Community Hub",
         },
       },
@@ -964,7 +964,7 @@ const TRANSLATIONS = {
     password: {
       title: "Bảo vệ Mật khẩu",
       description:
-        "Bảo vệ phiên bản AnythingLLM của bạn bằng mật khẩu. Nếu bạn quên mật khẩu này, không có phương pháp khôi phục nên hãy đảm bảo lưu mật khẩu này.",
+        "Bảo vệ phiên bản Kariana của bạn bằng mật khẩu. Nếu bạn quên mật khẩu này, không có phương pháp khôi phục nên hãy đảm bảo lưu mật khẩu này.",
       "password-label": "Mật khẩu của phiên bản",
     },
   },

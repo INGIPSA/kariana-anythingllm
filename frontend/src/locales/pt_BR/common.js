@@ -8,7 +8,7 @@ const TRANSLATIONS = {
     llm: {
       title: "Preferência de LLM",
       description:
-        "AnythingLLM funciona com vários provedores de LLM. Este será o serviço que lidará com os chats.",
+        "Kariana funciona com vários provedores de LLM. Este será o serviço que lidará com os chats.",
     },
     userSetup: {
       title: "Configuração do Usuário",
@@ -35,14 +35,14 @@ const TRANSLATIONS = {
         "Estas configurações podem ser alteradas a qualquer momento.",
     },
     survey: {
-      title: "Bem-vindo ao AnythingLLM",
-      description: "Ajude-nos a melhorar o AnythingLLM. Opcional.",
+      title: "Bem-vindo ao Kariana",
+      description: "Ajude-nos a melhorar o Kariana. Opcional.",
       email: "Qual seu email?",
-      useCase: "Como você usará o AnythingLLM?",
+      useCase: "Como você usará o Kariana?",
       useCaseWork: "Para trabalho",
       useCasePersonal: "Uso pessoal",
       useCaseOther: "Outro",
-      comment: "Como você conheceu o AnythingLLM?",
+      comment: "Como você conheceu o Kariana?",
       commentPlaceholder:
         "Reddit, Twitter, GitHub, YouTube, etc. - Conte como nos encontrou!",
       skip: "Pular Pesquisa",
@@ -93,7 +93,7 @@ const TRANSLATIONS = {
     "experimental-features": "Recursos Experimentais",
     contact: "Suporte",
     "browser-extension": "Extensão de Navegador",
-    "mobile-app": "AnythingLLM Mobile",
+    "mobile-app": "Kariana Mobile",
     "community-hub": {
       title: "Centro Comunitário",
       trending: "Explore as tendências",
@@ -154,7 +154,7 @@ const TRANSLATIONS = {
       add: "Adicionar mensagem",
       save: "Salvar Mensagens",
       heading: "Explique para mim",
-      body: "os benefícios do AnythingLLM",
+      body: "os benefícios do Kariana",
     },
     delete: {
       title: "Excluir Workspace",
@@ -342,7 +342,7 @@ const TRANSLATIONS = {
     },
     branding: {
       title: "Marca & Etiqueta Branca",
-      description: "Personalize sua instância do AnythingLLM com sua marca.",
+      description: "Personalize sua instância do Kariana com sua marca.",
     },
     chat: {
       title: "Chat",
@@ -465,7 +465,7 @@ const TRANSLATIONS = {
       "Credenciais e configurações do seu provedor de transcrição. Essas chaves devem estar corretas para processar arquivos de mídia.",
     provider: "Provedor de Transcrição",
     "warn-start":
-      "Usar o modelo local whisper em máquinas com RAM ou CPU limitada pode travar o AnythingLLM.",
+      "Usar o modelo local whisper em máquinas com RAM ou CPU limitada pode travar o Kariana.",
     "warn-recommend": "Recomendamos pelo menos 2GB de RAM e arquivos <10Mb.",
     "warn-end":
       "O modelo interno será baixado automaticamente no primeiro uso.",
@@ -543,7 +543,7 @@ const TRANSLATIONS = {
   privacy: {
     title: "Privacidade & Dados",
     description:
-      "Configurações de como provedores terceiros e o AnythingLLM lidam com seus dados.",
+      "Configurações de como provedores terceiros e o Kariana lidam com seus dados.",
     anonymous: "Telemetria Anônima Ativa",
   },
   connectors: {
@@ -709,7 +709,7 @@ const TRANSLATIONS = {
       fetching: "Buscando...",
       "fetch-website": "Buscar site",
       "privacy-notice":
-        "Esses arquivos são enviados ao processador local do AnythingLLM. Não são compartilhados com terceiros.",
+        "Esses arquivos são enviados ao processador local do Kariana. Não são compartilhados com terceiros.",
     },
     pinning: {
       what_pinning: "O que é fixar documento?",

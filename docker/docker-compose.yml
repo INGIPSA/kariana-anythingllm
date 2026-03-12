@@ -1,12 +1,12 @@
-name: anythingllm
+name: kariana
 
 networks:
-  anything-llm:
+  kariana:
     driver: bridge
 
 services:
-  anything-llm:
-    container_name: anythingllm
+  kariana:
+    container_name: kariana
     build:
       context: ../.
       dockerfile: ./docker/Dockerfile
@@ -26,6 +26,6 @@ services:
     env_file:
       - .env
     networks:
-      - anything-llm
+      - kariana
     extra_hosts:
       - "host.docker.internal:host-gateway"

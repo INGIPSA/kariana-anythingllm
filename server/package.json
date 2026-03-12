@@ -1,9 +1,9 @@
 {
-  "name": "anything-llm-server",
+  "name": "kariana-server",
   "version": "1.11.1",
   "description": "Server endpoints to process or create content for chatting",
   "main": "index.js",
-  "author": "Timothy Carambat (Mintplex Labs)",
+  "author": "INGIPSA",
   "license": "MIT",
   "private": false,
   "engines": {

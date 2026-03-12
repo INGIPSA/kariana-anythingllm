@@ -1,9 +1,9 @@
 {
-  "name": "anything-llm-document-collector",
+  "name": "kariana-document-collector",
   "version": "1.11.1",
   "description": "Document collector server endpoints",
   "main": "index.js",
-  "author": "Timothy Carambat (Mintplex Labs)",
+  "author": "INGIPSA",
   "license": "MIT",
   "private": false,
   "engines": {

@@ -27,8 +27,8 @@ class MetaGenerator {
   #customConfig = null;
 
   #defaultManifest = {
-    name: "AnythingLLM",
-    short_name: "AnythingLLM",
+    name: "Kariana",
+    short_name: "Kariana",
     display: "standalone",
     orientation: "portrait",
     start_url: "/",
@@ -59,21 +59,21 @@ class MetaGenerator {
       {
         tag: "title",
         props: null,
-        content: "AnythingLLM | Your personal LLM trained on anything",
+        content: "Kariana | Your AI assistant for creative applications",
       },
 
       {
         tag: "meta",
         props: {
           name: "title",
-          content: "AnythingLLM | Your personal LLM trained on anything",
+          content: "Kariana | Your AI assistant for creative applications",
         },
       },
       {
         tag: "meta",
         props: {
           description: "title",
-          content: "AnythingLLM | Your personal LLM trained on anything",
+          content: "Kariana | Your AI assistant for creative applications",
         },
       },
 
@@ -81,20 +81,20 @@ class MetaGenerator {
       { tag: "meta", props: { property: "og:type", content: "website" } },
       {
         tag: "meta",
-        props: { property: "og:url", content: "https://anythingllm.com" },
+        props: { property: "og:url", content: "https://kariana.app" },
       },
       {
         tag: "meta",
         props: {
           property: "og:title",
-          content: "AnythingLLM | Your personal LLM trained on anything",
+          content: "Kariana | Your AI assistant for creative applications",
         },
       },
       {
         tag: "meta",
         props: {
           property: "og:description",
-          content: "AnythingLLM | Your personal LLM trained on anything",
+          content: "Kariana | Your AI assistant for creative applications",
         },
       },
       {
@@ -102,7 +102,7 @@ class MetaGenerator {
         props: {
           property: "og:image",
           content:
-            "https://raw.githubusercontent.com/Mintplex-Labs/anything-llm/master/images/promo.png",
+            "https://kariana.app/images/promo.png",
         },
       },
 
@@ -113,20 +113,20 @@ class MetaGenerator {
       },
       {
         tag: "meta",
-        props: { property: "twitter:url", content: "https://anythingllm.com" },
+        props: { property: "twitter:url", content: "https://kariana.app" },
       },
       {
         tag: "meta",
         props: {
           property: "twitter:title",
-          content: "AnythingLLM | Your personal LLM trained on anything",
+          content: "Kariana | Your AI assistant for creative applications",
         },
       },
       {
         tag: "meta",
         props: {
           property: "twitter:description",
-          content: "AnythingLLM | Your personal LLM trained on anything",
+          content: "Kariana | Your AI assistant for creative applications",
         },
       },
       {
@@ -134,7 +134,7 @@ class MetaGenerator {
         props: {
           property: "twitter:image",
           content:
-            "https://raw.githubusercontent.com/Mintplex-Labs/anything-llm/master/images/promo.png",
+            "https://kariana.app/images/promo.png",
         },
       },
 
@@ -229,7 +229,7 @@ class MetaGenerator {
             props: null,
             content:
               customTitle ??
-              "AnythingLLM | Your personal LLM trained on anything",
+              "Kariana | Your AI assistant for creative applications",
           };
         }
         // Override meta title
@@ -240,7 +240,7 @@ class MetaGenerator {
               name: "title",
               content:
                 customTitle ??
-                "AnythingLLM | Your personal LLM trained on anything",
+                "Kariana | Your AI assistant for creative applications",
             },
           };
         }
@@ -252,7 +252,7 @@ class MetaGenerator {
               property: "og:title",
               content:
                 customTitle ??
-                "AnythingLLM | Your personal LLM trained on anything",
+                "Kariana | Your AI assistant for creative applications",
             },
           };
         }
@@ -264,7 +264,7 @@ class MetaGenerator {
               property: "twitter:title",
               content:
                 customTitle ??
-                "AnythingLLM | Your personal LLM trained on anything",
+                "Kariana | Your AI assistant for creative applications",
             },
           };
         }
@@ -330,7 +330,7 @@ class MetaGenerator {
       const { SystemSettings } = require("../../models/systemSettings");
       const manifestName = await SystemSettings.getValueOrFallback(
         { label: "meta_page_title" },
-        "AnythingLLM"
+        "Kariana"
       );
       const faviconURL = await SystemSettings.getValueOrFallback(
         { label: "meta_page_favicon" },
