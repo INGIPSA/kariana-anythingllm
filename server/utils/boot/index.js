@@ -37,6 +37,7 @@ function bootSSL(app, port = 3001) {
         new BackgroundService().boot();
         await eagerLoadContextWindows();
         await PushNotifications.setupPushNotificationService();
+        bootDCCAutoConnections();
         console.log(`Primary server in HTTPS mode listening on port ${port}`);
       })
       .on("error", catchSigTerms);
@@ -69,11 +70,24 @@ function bootHTTP(app, port = 3001) {
       new BackgroundService().boot();
       await eagerLoadContextWindows();
       await PushNotifications.setupPushNotificationService();
+      bootDCCAutoConnections();
       console.log(`Primary server in HTTP mode listening on port ${port}`);
     })
     .on("error", catchSigTerms);
 
   return { app, server: null };
+}
+
+function bootDCCAutoConnections() {
+  const DCCMCPHost = require("../DCCHost");
+  new DCCMCPHost()
+    .bootAutoConnections()
+    .then(() => {
+      console.log("[DCCHost] Auto-connect DCC connections booted");
+    })
+    .catch((e) => {
+      console.error("[DCCHost] Error booting auto-connect:", e.message);
+    });
 }
 
 function catchSigTerms() {
