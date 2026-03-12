@@ -153,6 +153,7 @@ model workspaces {
   workspace_agent_invocations  workspace_agent_invocations[]
   prompt_history               prompt_history[]
   workspace_parsed_files       workspace_parsed_files[]
+  project_workspaces           project_workspaces[]
 }
 
 model workspace_threads {
@@ -392,4 +393,42 @@ model workspace_parsed_files {
 
   @@index([workspaceId])
   @@index([userId])
+}
+
+model projects {
+  id                Int      @id @default(autoincrement())
+  name              String
+  slug              String   @unique
+  description       String?  @default("")
+  defaultAppType    String?
+  settings          String?  @default("{}")
+  createdBy         Int?
+  createdAt         DateTime @default(now())
+  lastUpdatedAt     DateTime @default(now())
+
+  project_connections project_connections[]
+  project_workspaces  project_workspaces[]
+}
+
+model project_connections {
+  id              Int      @id @default(autoincrement())
+  projectId       Int
+  connectionId    Int
+  createdAt       DateTime @default(now())
+
+  project         projects @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, connectionId])
+}
+
+model project_workspaces {
+  id              Int      @id @default(autoincrement())
+  projectId       Int
+  workspaceId     Int
+  createdAt       DateTime @default(now())
+
+  project         projects   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  workspace       workspaces @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, workspaceId])
 }

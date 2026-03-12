@@ -173,6 +173,9 @@ export default {
     dccConnections: () => {
       return `/settings/dcc-connections`;
     },
+    projects: () => {
+      return `/settings/projects`;
+    },
   },
   agents: {
     builder: () => {
