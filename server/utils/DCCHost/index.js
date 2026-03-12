@@ -185,7 +185,13 @@ class DCCMCPHost {
    * @returns {SSEClientTransport | StreamableHTTPClientTransport}
    */
   #createTransport(transportType, host, port) {
-    const baseUrl = `http://${host}:${port}`;
+    // Inside Docker, "localhost" refers to the container itself.
+    // Rewrite to host.docker.internal so we can reach the host machine.
+    const resolvedHost =
+      (host === "localhost" || host === "127.0.0.1") && process.env.ANYTHING_LLM_RUNTIME === "docker"
+        ? "host.docker.internal"
+        : host;
+    const baseUrl = `http://${resolvedHost}:${port}`;
 
     if (transportType === "http") {
       try {

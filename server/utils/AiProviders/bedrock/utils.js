@@ -97,12 +97,20 @@ function createBedrockChatClient(config = {}, authMethod, credentials, model) {
   credentials ||= createBedrockCredentials(authMethod);
   model ||= process.env.AWS_BEDROCK_LLM_MODEL_PREFERENCE ?? null;
   const client = createBedrockRuntimeClient(authMethod, credentials);
-  return new ChatBedrockConverse({
+  const chatOpts = {
     region: process.env.AWS_BEDROCK_LLM_REGION,
     client,
     model,
     ...config,
-  });
+  };
+
+  // Pass credentials directly to ChatBedrockConverse as well — Langchain may
+  // create its own internal client for streaming and needs resolvable credentials.
+  if (credentials && authMethod !== "apiKey") {
+    chatOpts.credentials = credentials;
+  }
+
+  return new ChatBedrockConverse(chatOpts);
 }
 
 /**

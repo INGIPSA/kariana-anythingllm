@@ -150,17 +150,6 @@ Kariana divides your documents into objects called `workspaces`. A Workspace fun
 - [Milvus](https://milvus.io)
 - [Zilliz](https://zilliz.com)
 
-### Technical Overview
-
-This monorepo consists of six main sections:
-
-- `frontend`: A viteJS + React frontend that you can run to easily create and manage all your content the LLM can use.
-- `server`: A NodeJS express server to handle all the interactions and do all the vectorDB management and LLM interactions.
-- `collector`: NodeJS express server that processes and parses documents from the UI.
-- `docker`: Docker instructions and build process + information for building from source.
-- `embed`: Submodule for generation & creation of the [web embed widget](https://github.com/INGIPSA/kariana-embed).
-- `browser-extension`: Submodule for the [chrome browser extension](https://github.com/INGIPSA/kariana-extension).
-
 ## 🛳 Self-Hosting
 
 INGIPSA & the community maintain a number of deployment methods, scripts, and templates that you can use to run Kariana locally. Refer to the table below to read how to deploy on your preferred environment or to automatically deploy.

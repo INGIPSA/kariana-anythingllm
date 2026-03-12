@@ -9,10 +9,7 @@ import { isMobile } from "react-device-detect";
 import {
   UnrealLogo,
   BlenderLogo,
-  MayaLogo,
   HoudiniLogo,
-  UnityLogo,
-  GodotLogo,
 } from "@/media/creativeApps";
 
 const STATUS_POLL_INTERVAL = 10_000;
@@ -23,7 +20,7 @@ const APPS = [
     id: "unreal",
     name: "Unreal Engine",
     logo: UnrealLogo,
-    color: "#0D47A1",
+    color: "#0D0D0D",
     enabled: true,
     description: "Connect to Unreal Engine via KARIANA plugin",
     defaultHost: "localhost",
@@ -41,31 +38,10 @@ const APPS = [
     enabled: false,
   },
   {
-    id: "maya",
-    name: "Maya",
-    logo: MayaLogo,
-    color: "#00BCD4",
-    enabled: false,
-  },
-  {
     id: "houdini",
     name: "Houdini",
     logo: HoudiniLogo,
     color: "#FF5722",
-    enabled: false,
-  },
-  {
-    id: "unity",
-    name: "Unity",
-    logo: UnityLogo,
-    color: "#222C37",
-    enabled: false,
-  },
-  {
-    id: "godot",
-    name: "Godot",
-    logo: GodotLogo,
-    color: "#478CBF",
     enabled: false,
   },
 ];
