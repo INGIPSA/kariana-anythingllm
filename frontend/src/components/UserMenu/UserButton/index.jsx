@@ -4,7 +4,12 @@ import useUser from "@/hooks/useUser";
 import System from "@/models/system";
 import paths from "@/utils/paths";
 import { userFromStorage } from "@/utils/request";
-import { Person } from "@phosphor-icons/react";
+import {
+  Person,
+  Headset,
+  CreditCard,
+  Sliders,
+} from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
 import AccountModal from "../AccountModal";
 import {
@@ -15,10 +20,107 @@ import {
   USER_PROMPT_INPUT_MAP,
 } from "@/utils/constants";
 import { useTranslation } from "react-i18next";
+import { useClerkConfig } from "@/ClerkProviderWrapper";
+import { UserButton as ClerkUserButton } from "@clerk/clerk-react";
 
 export default function UserButton() {
-  const { t } = useTranslation();
+  const { clerkEnabled } = useClerkConfig();
   const mode = useLoginMode();
+
+  if (mode === null) return null;
+
+  if (clerkEnabled) {
+    return <ClerkUserMenu />;
+  }
+
+  return <LegacyUserMenu mode={mode} />;
+}
+
+/**
+ * Clerk-powered user menu with avatar, account management, and custom links.
+ * Clerk handles sign-out, account settings, and avatar automatically.
+ * "App Settings" opens the legacy AccountModal for KARIANA-specific preferences
+ * (profile picture, username, bio, theme, language, STT/TTS toggles).
+ */
+function ClerkUserMenu() {
+  const { user } = useUser();
+  const [supportEmail, setSupportEmail] = useState("");
+  const [showAccountSettings, setShowAccountSettings] = useState(false);
+
+  useEffect(() => {
+    const fetchSupportEmail = async () => {
+      const result = await System.fetchSupportEmail();
+      setSupportEmail(
+        result?.email ? `mailto:${result.email}` : "mailto:business@kariana.ai"
+      );
+    };
+    fetchSupportEmail();
+  }, []);
+
+  return (
+    <div className="absolute top-3 right-4 md:top-9 md:right-10 w-fit h-fit z-40">
+      <style>{`
+        .cl-userButtonPopoverCard [role="menuitem"] {
+          color: #E8E8E9 !important;
+        }
+        .cl-userButtonPopoverCard [role="menuitem"] svg {
+          color: #B0B0B1 !important;
+          opacity: 1 !important;
+        }
+        .cl-userButtonPopoverCard [role="menuitem"]:hover {
+          color: #E8E8E9 !important;
+          background-color: #2A2627 !important;
+        }
+        .cl-userButtonPopoverCard [role="menuitem"]:hover svg {
+          color: #FF7EDC !important;
+        }
+      `}</style>
+      <ClerkUserButton
+        afterSignOutUrl="/login"
+        appearance={{
+          elements: {
+            avatarBox: "w-[35px] h-[35px]",
+            userButtonPopoverCard:
+              "bg-[#231F20] border border-[#3A3637] shadow-xl",
+            userButtonPopoverFooter: "hidden",
+          },
+        }}
+      >
+        <ClerkUserButton.MenuItems>
+          <ClerkUserButton.Action
+            label="App Settings"
+            labelIcon={<Sliders size={16} />}
+            onClick={() => setShowAccountSettings(true)}
+          />
+          <ClerkUserButton.Link
+            label="Support"
+            labelIcon={<Headset size={16} />}
+            href={supportEmail}
+          />
+          <ClerkUserButton.Link
+            label="Billing"
+            labelIcon={<CreditCard size={16} />}
+            href="/pricing"
+          />
+          <ClerkUserButton.Action label="manageAccount" />
+          <ClerkUserButton.Action label="signOut" />
+        </ClerkUserButton.MenuItems>
+      </ClerkUserButton>
+      {user && showAccountSettings && (
+        <AccountModal
+          user={user}
+          hideModal={() => setShowAccountSettings(false)}
+        />
+      )}
+    </div>
+  );
+}
+
+/**
+ * Legacy user menu for non-Clerk mode (original AnythingLLM behavior).
+ */
+function LegacyUserMenu({ mode }) {
+  const { t } = useTranslation();
   const { user } = useUser();
   const menuRef = useRef();
   const buttonRef = useRef();
@@ -60,7 +162,6 @@ export default function UserButton() {
     fetchSupportEmail();
   }, []);
 
-  if (mode === null) return null;
   return (
     <div className="absolute top-3 right-4 md:top-9 md:right-10 w-fit h-fit z-40">
       <button

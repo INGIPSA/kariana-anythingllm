@@ -397,6 +397,14 @@ const router = createBrowserRouter([
           return { element: <AdminRoute Component={ProjectsSettings} /> };
         },
       },
+      // Pricing page (Stripe checkout)
+      {
+        path: "/pricing",
+        lazy: async () => {
+          const { default: PricingPage } = await import("@/pages/Pricing");
+          return { element: <PricingPage /> };
+        },
+      },
       // Catch-all route for 404s
       {
         path: "*",
