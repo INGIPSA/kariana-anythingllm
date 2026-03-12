@@ -1,271 +1,117 @@
-<a name="readme-top"></a>
+# Kariana - AI-Powered Creative App Hub
 
-<p align="center">
-  <a href="https://kariana.com"><img src="https://github.com/INGIPSA/kariana/blob/master/images/wordmark.png?raw=true" alt="Kariana logo"></a>
-</p>
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue)](./docker/HOW_TO_USE_DOCKER.md)
+[![LLM Providers](https://img.shields.io/badge/LLM%20Providers-30+-purple)](https://github.com/INGIPSA/kariana-anythingllm)
+[![MCP](https://img.shields.io/badge/MCP-Compatible-orange)](https://docs.kariana.com/mcp-compatibility/overview)
+[![Docs](https://img.shields.io/badge/Docs-kariana.com-blue)](https://docs.kariana.com)
 
-<div align='center'>
-<a href="https://trendshift.io/repositories/2415" target="_blank"><img src="https://trendshift.io/api/badge/repositories/2415" alt="INGIPSA%2Fkariana | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
-</div>
+**Kariana** is the AI hub that connects your creative applications to any LLM. Chat with your docs, use AI Agents, connect to Unreal Engine with 218+ MCP tools, and manage everything from a single interface. Multi-user, hyper-configurable, and self-hostable.
 
-<p align="center">
-    <b>Kariana:</b> The all-in-one AI app you were looking for.<br />
-    Chat with your docs, use AI Agents, hyper-configurable, multi-user, & no frustrating setup required.
-</p>
+## Features
 
-<p align="center">
-  <a href="https://discord.gg/6UyHPeGZAC" target="_blank">
-      <img src="https://img.shields.io/badge/chat-mintplex_labs-blue.svg?style=flat&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAH1UExURQAAAP////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////r6+ubn5+7u7/3+/v39/enq6urq6/v7+97f39rb26eoqT1BQ0pOT4+Rkuzs7cnKykZKS0NHSHl8fdzd3ejo6UxPUUBDRdzc3RwgIh8jJSAkJm5xcvHx8aanqB4iJFBTVezt7V5hYlJVVuLj43p9fiImKCMnKZKUlaaoqSElJ21wcfT09O3u7uvr6zE0Nr6/wCUpK5qcnf7+/nh7fEdKTHx+f0tPUOTl5aipqiouMGtubz5CRDQ4OsTGxufn515hY7a3uH1/gXBydIOFhlVYWvX29qaoqCQoKs7Pz/Pz87/AwUtOUNfY2dHR0mhrbOvr7E5RUy8zNXR2d/f39+Xl5UZJSx0hIzQ3Odra2/z8/GlsbaGjpERHSezs7L/BwScrLTQ4Odna2zM3Obm7u3x/gKSmp9jZ2T1AQu/v71pdXkVISr2+vygsLiInKTg7PaOlpisvMcXGxzk8PldaXPLy8u7u7rm6u7S1tsDBwvj4+MPExbe4ueXm5s/Q0Kyf7ewAAAAodFJOUwAABClsrNjx/QM2l9/7lhmI6jTB/kA1GgKJN+nea6vy/MLZQYeVKK3rVA5tAAAAAWJLR0QB/wIt3gAAAAd0SU1FB+cKBAAmMZBHjXIAAAISSURBVDjLY2CAAkYmZhZWNnYODnY2VhZmJkYGVMDIycXNw6sBBbw8fFycyEoYGfkFBDVQgKAAPyMjQl5IWEQDDYgIC8FUMDKKsmlgAWyiEBWMjGJY5YEqxMAqGMWFNXAAYXGgAkYJSQ2cQFKCkYFRShq3AmkpRgYJbghbU0tbB0Tr6ukbgGhDI10gySfBwCwDUWBsYmpmDqQtLK2sbTQ0bO3sHYA8GWYGWWj4WTs6Obu4ami4OTm7exhqeHp5+4DCVJZBDmqdr7ufn3+ArkZgkJ+fU3CIRmgYWFiOARYGvo5OQUHhEUAFTkF+kVHRsLBgkIeyYmLjwoOc4hMSk5JTnINS06DC8gwcEEZ6RqZGlpOfc3ZObl5+gZ+TR2ERWFyBQQFMF5eklmqUpQb5+ReU61ZUOvkFVVXXQBSAraitq29o1GiKcfLzc29u0mjxBzq0tQ0kww5xZHtHUGeXhkZhdxBYgZ4d0LI6c4gjwd7siQQraOp1AivQ6CuAKZCDBBRQQQNQgUb/BGf3cqCCiZOcnCe3QQIKHNRTpk6bDgpZjRkzg3pBQTBrdtCcuZCgluAD0vPmL1gIdvSixUuWgqNs2YJ+DUhkEYxuggkGmOQUcckrioPTJCOXEnZ5JS5YslbGnuyVERlDDFvGEUPOWvwqaH6RVkHKeuDMK6SKnHlVhTgx8jeTmqy6Eij7K6nLqiGyPwChsa1MUrnq1wAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0xMC0wNFQwMDozODo0OSswMDowMB9V0a8AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMTAtMDRUMDA6Mzg6NDkrMDA6MDBuCGkTAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTEwLTA0VDAwOjM4OjQ5KzAwOjAwOR1IzAAAAABJRU5ErkJggg==" alt="Discord">
-  </a> |
-  <a href="https://github.com/INGIPSA/kariana/blob/master/LICENSE" target="_blank">
-      <img src="https://img.shields.io/static/v1?label=license&message=MIT&color=white" alt="License">
-  </a> |
-  <a href="https://docs.kariana.com" target="_blank">
-    Docs
-  </a> |
-   <a href="https://my.ingipsa.com/aio-checkout?product=kariana" target="_blank">
-    Hosted Instance
-  </a>
-</p>
+### Core Features
+- **Full MCP Compatibility** - Connect to any MCP-compatible tool server
+- **DCC App Connections** - Direct integration with Unreal Engine, Blender, Houdini (coming soon)
+- **No-Code AI Agent Builder** - Create custom agent workflows visually
+- **Custom AI Agents** - Agents with web browsing, code execution, and tool use
+- **Multi-Modal Support** - Images, documents, and text with both closed and open-source LLMs
+- **Multi-User & Permissions** - Role-based access control with Clerk authentication
+- **Document Workspaces** - Containerized RAG with PDF, TXT, DOCX, and more
+- **Embeddable Chat Widget** - Drop-in chat for your website
+- **Full Developer API** - REST API for custom integrations
 
-<p align="center">
-  <b>English</b> · <a href='./locales/README.zh-CN.md'>简体中文</a> · <a href='./locales/README.ja-JP.md'>日本語</a>
-</p>
+### DCC App Integration
 
-<p align="center">
-👉 Kariana for desktop (Mac, Windows, & Linux)! <a href="https://kariana.com/download" target="_blank"> Download Now</a>
-</p>
+| App | Status | Tools | Description |
+|-----|--------|-------|-------------|
+| **Unreal Engine** | Available | 218+ | Full engine control via [KARIANA plugin](https://github.com/INGIPSA/KARIANA) |
+| **Blender** | Coming Soon | - | 3D modeling and rendering |
+| **Houdini** | Coming Soon | - | Procedural generation |
 
-A full-stack application that enables you to turn any document, resource, or piece of content into context that any LLM can use as a reference during chatting. This application allows you to pick and choose which LLM or Vector Database you want to use as well as supporting multi-user management and permissions.
+### Supported LLM Providers
 
-![Chatting](https://github.com/INGIPSA/kariana/assets/16845892/cfc5f47c-bd91-4067-986c-f3f49621a859)
+| Category | Providers |
+|----------|-----------|
+| **Commercial** | OpenAI, Anthropic, AWS Bedrock, Azure OpenAI, Google Gemini, Mistral, Groq, Cohere, xAI, DeepSeek, Perplexity |
+| **Open Source** | Ollama, LM Studio, LocalAI, KoboldCPP, llama.cpp, Text Generation Web UI, LiteLLM |
+| **Routers** | OpenRouter, Together AI, Fireworks AI, Novita AI, PPIO, SambaNova Cloud |
+| **Embedders** | Native Embedder (default), OpenAI, Azure OpenAI, Ollama, LM Studio, Cohere |
+| **Vector DBs** | LanceDB (default), PGVector, Pinecone, Chroma, Weaviate, Qdrant, Milvus, Zilliz, Astra DB |
+| **TTS/STT** | Native Browser, OpenAI TTS, ElevenLabs, PiperTTS |
 
-<details>
-<summary><kbd>Watch the demo!</kbd></summary>
+## Installation
 
-[![Watch the video](/images/youtube.png)](https://youtu.be/f95rGD9trL0)
+### Docker (Recommended)
 
-</details>
+```bash
+git clone https://github.com/INGIPSA/kariana-anythingllm.git
+cd kariana-anythingllm/docker
+cp .env.example .env  # Edit with your settings
+docker compose up -d --build
+```
 
-### Product Overview
+Then open [http://localhost:3001](http://localhost:3001).
 
-Kariana is a full-stack application where you can use commercial off-the-shelf LLMs or popular open source LLMs and vectorDB solutions to build a private ChatGPT with no compromises that you can run locally as well as host remotely and be able to chat intelligently with any documents you provide it.
+### Development Setup
 
-Kariana divides your documents into objects called `workspaces`. A Workspace functions a lot like a thread, but with the addition of containerization of your documents. Workspaces can share documents, but they do not talk to each other so you can keep your context for each workspace clean.
+```bash
+yarn setup          # Fill in .env files
+yarn dev:server     # Start the server
+yarn dev:frontend   # Start the frontend
+yarn dev:collector  # Start the document collector
+```
 
-## Cool features of Kariana
+### Cloud Deployment
 
-- 🆕 [**Full MCP-compatibility**](https://docs.kariana.com/mcp-compatibility/overview)
-- 🆕 [**No-code AI Agent builder**](https://docs.kariana.com/agent-flows/overview)
-- 🖼️ **Multi-modal support (both closed and open-source LLMs!)**
-- [**Custom AI Agents**](https://docs.kariana.com/agent/custom/introduction)
-- 👤 Multi-user instance support and permissioning _Docker version only_
-- 🦾 Agents inside your workspace (browse the web, etc)
-- 💬 [Custom Embeddable Chat widget for your website](https://github.com/INGIPSA/kariana-embed/blob/main/README.md) _Docker version only_
-- 📖 Multiple document type support (PDF, TXT, DOCX, etc)
-- Simple chat UI with Drag-n-Drop functionality and clear citations.
-- 100% Cloud deployment ready.
-- Works with all popular [closed and open-source LLM providers](#supported-llms-embedder-models-speech-models-and-vector-databases).
-- Built-in cost & time-saving measures for managing very large documents compared to any other chat UI.
-- Full Developer API for custom integrations!
-- Much more...install and find out!
-
-### Supported LLMs, Embedder Models, Speech models, and Vector Databases
-
-**Large Language Models (LLMs):**
-
-- [Any open-source llama.cpp compatible model](/server/storage/models/README.md#text-generation-llm-selection)
-- [OpenAI](https://openai.com)
-- [OpenAI (Generic)](https://openai.com)
-- [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service)
-- [AWS Bedrock](https://aws.amazon.com/bedrock/)
-- [Anthropic](https://www.anthropic.com/)
-- [NVIDIA NIM (chat models)](https://build.nvidia.com/explore/discover)
-- [Google Gemini Pro](https://ai.google.dev/)
-- [Hugging Face (chat models)](https://huggingface.co/)
-- [Ollama (chat models)](https://ollama.ai/)
-- [LM Studio (all models)](https://lmstudio.ai)
-- [LocalAI (all models)](https://localai.io/)
-- [Together AI (chat models)](https://www.together.ai/)
-- [Fireworks AI (chat models)](https://fireworks.ai/)
-- [Perplexity (chat models)](https://www.perplexity.ai/)
-- [OpenRouter (chat models)](https://openrouter.ai/)
-- [DeepSeek (chat models)](https://deepseek.com/)
-- [Mistral](https://mistral.ai/)
-- [Groq](https://groq.com/)
-- [Cohere](https://cohere.com/)
-- [KoboldCPP](https://github.com/LostRuins/koboldcpp)
-- [LiteLLM](https://github.com/BerriAI/litellm)
-- [Text Generation Web UI](https://github.com/oobabooga/text-generation-webui)
-- [Apipie](https://apipie.ai/)
-- [xAI](https://x.ai/)
-- [Z.AI (chat models)](https://z.ai/model-api)
-- [Novita AI (chat models)](https://novita.ai/model-api/product/llm-api?utm_source=github_kariana&utm_medium=github_readme&utm_campaign=link)
-- [PPIO](https://ppinfra.com?utm_source=github_kariana)
-- [Gitee AI](https://ai.gitee.com/)
-- [Moonshot AI](https://www.moonshot.ai/)
-- [Microsoft Foundry Local](https://github.com/microsoft/Foundry-Local)
-- [CometAPI (chat models)](https://api.cometapi.com/)
-- [Docker Model Runner](https://docs.docker.com/ai/model-runner/)
-- [PrivateModeAI (chat models)](https://privatemode.ai/)
-- [SambaNova Cloud (chat models)](https://cloud.sambanova.ai/)
-- [Lemonade by AMD](https://lemonade-server.ai)
-
-**Embedder models:**
-
-- [Kariana Native Embedder](/server/storage/models/README.md) (default)
-- [OpenAI](https://openai.com)
-- [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service)
-- [LocalAI (all)](https://localai.io/)
-- [Ollama (all)](https://ollama.ai/)
-- [LM Studio (all)](https://lmstudio.ai)
-- [Cohere](https://cohere.com/)
-
-**Audio Transcription models:**
-
-- [Kariana Built-in](https://github.com/INGIPSA/kariana/tree/master/server/storage/models#audiovideo-transcription) (default)
-- [OpenAI](https://openai.com/)
-
-**TTS (text-to-speech) support:**
-
-- Native Browser Built-in (default)
-- [PiperTTSLocal - runs in browser](https://github.com/rhasspy/piper)
-- [OpenAI TTS](https://platform.openai.com/docs/guides/text-to-speech/voice-options)
-- [ElevenLabs](https://elevenlabs.io/)
-- Any OpenAI Compatible TTS service.
-
-**STT (speech-to-text) support:**
-
-- Native Browser Built-in (default)
-
-**Vector Databases:**
-
-- [LanceDB](https://github.com/lancedb/lancedb) (default)
-- [PGVector](https://github.com/pgvector/pgvector)
-- [Astra DB](https://www.datastax.com/products/datastax-astra)
-- [Pinecone](https://pinecone.io)
-- [Chroma & ChromaCloud](https://trychroma.com)
-- [Weaviate](https://weaviate.io)
-- [Qdrant](https://qdrant.tech)
-- [Milvus](https://milvus.io)
-- [Zilliz](https://zilliz.com)
-
-## 🛳 Self-Hosting
-
-INGIPSA & the community maintain a number of deployment methods, scripts, and templates that you can use to run Kariana locally. Refer to the table below to read how to deploy on your preferred environment or to automatically deploy.
 | Docker | AWS | GCP | Digital Ocean | Render.com |
-|----------------------------------------|----|-----|---------------|------------|
+|--------|-----|-----|---------------|------------|
 | [![Deploy on Docker][docker-btn]][docker-deploy] | [![Deploy on AWS][aws-btn]][aws-deploy] | [![Deploy on GCP][gcp-btn]][gcp-deploy] | [![Deploy on DigitalOcean][do-btn]][do-deploy] | [![Deploy on Render.com][render-btn]][render-deploy] |
 
-| Railway                                             | RepoCloud                                                 | Elestio                                             | Northflank                                                   |
-| --------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------ |
+| Railway | RepoCloud | Elestio | Northflank |
+|---------|-----------|---------|------------|
 | [![Deploy on Railway][railway-btn]][railway-deploy] | [![Deploy on RepoCloud][repocloud-btn]][repocloud-deploy] | [![Deploy on Elestio][elestio-btn]][elestio-deploy] | [![Deploy on Northflank][northflank-btn]][northflank-deploy] |
 
-[or set up a production Kariana instance without Docker →](./BARE_METAL.md)
+[Or set up a production instance without Docker ->](./BARE_METAL.md)
 
-## How to setup for development
+## Quick Start with Unreal Engine
 
-- `yarn setup` To fill in the required `.env` files you'll need in each of the application sections (from root of repo).
-  - Go fill those out before proceeding. Ensure `server/.env.development` is filled or else things won't work right.
-- `yarn dev:server` To boot the server locally (from root of repo).
-- `yarn dev:frontend` To boot the frontend locally (from root of repo).
-- `yarn dev:collector` To then run the document collector (from root of repo).
+1. Install the [KARIANA plugin](https://github.com/INGIPSA/KARIANA) in Unreal Engine
+2. Open your UE project (MCP servers start automatically on ports 8001 & 8002)
+3. In Kariana, go to **Settings > Connections > Apps** and click **Connect** on Unreal Engine
+4. Start chatting with your AI — it now has full control of the engine
 
-[Learn about documents](./server/storage/documents/DOCUMENTS.md)
+## Documentation
 
-[Learn about vector caching](./server/storage/vector-cache/VECTOR_CACHE.md)
+| Section | Link |
+|---------|------|
+| Full Documentation | [docs.kariana.com](https://docs.kariana.com) |
+| MCP Compatibility | [MCP Overview](https://docs.kariana.com/mcp-compatibility/overview) |
+| Agent Flows | [Agent Builder](https://docs.kariana.com/agent-flows/overview) |
+| Custom Agents | [Agent Docs](https://docs.kariana.com/agent/custom/introduction) |
+| KARIANA Plugin | [GitHub](https://github.com/INGIPSA/KARIANA) |
 
-## External Apps & Integrations
+## Contributing
 
-_These are apps that are not maintained by INGIPSA, but are compatible with Kariana. A listing here is not an endorsement._
+Contributions are welcome! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
-- [Midori AI Subsystem Manager](https://io.midori-ai.xyz/subsystem/kariana/) - A streamlined and efficient way to deploy AI systems using Docker container technology.
-- [Coolify](https://coolify.io/docs/services/kariana/) - Deploy Kariana with a single click.
-- [GPTLocalhost for Microsoft Word](https://gptlocalhost.com/demo/) - A local Word Add-in for you to use Kariana in Microsoft Word.
+## License
 
-## Telemetry & Privacy
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
-Kariana by INGIPSA Inc contains a telemetry feature that collects anonymous usage information.
+## Links
 
-<details>
-<summary><kbd>More about Telemetry & Privacy for Kariana</kbd></summary>
-
-### Why?
-
-We use this information to help us understand how Kariana is used, to help us prioritize work on new features and bug fixes, and to help us improve Kariana's performance and stability.
-
-### Opting out
-
-Set `DISABLE_TELEMETRY` in your server or docker .env settings to "true" to opt out of telemetry. You can also do this in-app by going to the sidebar > `Privacy` and disabling telemetry.
-
-### What do you explicitly track?
-
-We will only track usage details that help us make product and roadmap decisions, specifically:
-
-- Type of your installation (Docker or Desktop)
-
-- When a document is added or removed. No information _about_ the document. Just that the event occurred. This gives us an idea of use.
-
-- Type of vector database in use. This helps us prioritize changes when updates arrive for that provider.
-
-- Type of LLM provider & model tag in use. This helps us prioritize changes when updates arrive for that provider or model, or combination thereof. eg: reasoning vs regular, multi-modal models, etc.
-
-- When a chat is sent. This is the most regular "event" and gives us an idea of the daily-activity of this project across all installations. Again, only the **event** is sent - we have no information on the nature or content of the chat itself.
-
-You can verify these claims by finding all locations `Telemetry.sendTelemetry` is called. Additionally these events are written to the output log so you can also see the specific data which was sent - if enabled. **No IP or other identifying information is collected**. The Telemetry provider is [PostHog](https://posthog.com/) - an open-source telemetry collection service.
-
-We take privacy very seriously, and we hope you understand that we want to learn how our tool is used, without using annoying popup surveys, so we can build something worth using. The anonymous data is _never_ shared with third parties, ever.
-
-[View all telemetry events in source code](https://github.com/search?q=repo%3AINGIPSA%2Fkariana%20.sendTelemetry(&type=code)
-
-</details>
-
-## 👋 Contributing
-
-- [Contributing to Kariana](./CONTRIBUTING.md) - How to contribute to Kariana.
-
-## 💖 Sponsors
-
-### Premium Sponsors
-
-<!-- premium-sponsors (reserved for $100/mth sponsors who request to be called out here and/or are non-private sponsors) -->
-<a href="https://www.dcsdigital.co.uk" target="_blank">
-  <img src="https://a8cforagenciesportfolio.wordpress.com/wp-content/uploads/2024/08/logo-image-232621379.png" height="100px" alt="User avatar: DCS DIGITAL" />
-</a>
-<!-- premium-sponsors -->
-
-### All Sponsors
-
-<!-- all-sponsors --><a href="https://github.com/jaschadub"><img src="https:&#x2F;&#x2F;github.com&#x2F;jaschadub.png" width="60px" alt="User avatar: Jascha" /></a><a href="https://github.com/KickingAss2024"><img src="https:&#x2F;&#x2F;github.com&#x2F;KickingAss2024.png" width="60px" alt="User avatar: KickAss" /></a><a href="https://github.com/ShadowArcanist"><img src="https:&#x2F;&#x2F;github.com&#x2F;ShadowArcanist.png" width="60px" alt="User avatar: ShadowArcanist" /></a><a href="https://github.com/AtlasVIA"><img src="https:&#x2F;&#x2F;github.com&#x2F;AtlasVIA.png" width="60px" alt="User avatar: Atlas" /></a><a href="https://github.com/cope"><img src="https:&#x2F;&#x2F;github.com&#x2F;cope.png" width="60px" alt="User avatar: Predrag Stojadinović" /></a><a href="https://github.com/DiegoSpinola"><img src="https:&#x2F;&#x2F;github.com&#x2F;DiegoSpinola.png" width="60px" alt="User avatar: Diego Spinola" /></a><a href="https://github.com/PortlandKyGuy"><img src="https:&#x2F;&#x2F;github.com&#x2F;PortlandKyGuy.png" width="60px" alt="User avatar: Kyle" /></a><a href="https://github.com/peperunas"><img src="https:&#x2F;&#x2F;github.com&#x2F;peperunas.png" width="60px" alt="User avatar: Giulio De Pasquale" /></a><a href="https://github.com/jasoncdavis0"><img src="https:&#x2F;&#x2F;github.com&#x2F;jasoncdavis0.png" width="60px" alt="User avatar: " /></a><a href="https://github.com/macstadium"><img src="https:&#x2F;&#x2F;github.com&#x2F;macstadium.png" width="60px" alt="User avatar: MacStadium" /></a><a href="https://github.com/armlynobinguar"><img src="https:&#x2F;&#x2F;github.com&#x2F;armlynobinguar.png" width="60px" alt="User avatar: " /></a><a href="https://github.com/MikeHago"><img src="https:&#x2F;&#x2F;github.com&#x2F;MikeHago.png" width="60px" alt="User avatar: " /></a><a href="https://github.com/maaisde"><img src="https:&#x2F;&#x2F;github.com&#x2F;maaisde.png" width="60px" alt="User avatar: " /></a><a href="https://github.com/mhollier117"><img src="https:&#x2F;&#x2F;github.com&#x2F;mhollier117.png" width="60px" alt="User avatar: " /></a><a href="https://github.com/pleabargain"><img src="https:&#x2F;&#x2F;github.com&#x2F;pleabargain.png" width="60px" alt="User avatar: Dennis" /></a><a href="https://github.com/broichan"><img src="https:&#x2F;&#x2F;github.com&#x2F;broichan.png" width="60px" alt="User avatar: Michael Hamilton, Ph.D." /></a><a href="https://github.com/azim-charaniya"><img src="https:&#x2F;&#x2F;github.com&#x2F;azim-charaniya.png" width="60px" alt="User avatar: " /></a><a href="https://github.com/gabriellemon"><img src="https:&#x2F;&#x2F;github.com&#x2F;gabriellemon.png" width="60px" alt="User avatar: TernaryLabs" /></a><a href="https://github.com/CelaDaniel"><img src="https:&#x2F;&#x2F;github.com&#x2F;CelaDaniel.png" width="60px" alt="User avatar: Daniel Cela" /></a><a href="https://github.com/altrsadmin"><img src="https:&#x2F;&#x2F;github.com&#x2F;altrsadmin.png" width="60px" alt="User avatar: Alesso" /></a><a href="https://github.com/bitjungle"><img src="https:&#x2F;&#x2F;github.com&#x2F;bitjungle.png" width="60px" alt="User avatar: Rune Mathisen" /></a><a href="https://github.com/pcrossleyAC"><img src="https:&#x2F;&#x2F;github.com&#x2F;pcrossleyAC.png" width="60px" alt="User avatar: " /></a><a href="https://github.com/saroj-pattnaik"><img src="https:&#x2F;&#x2F;github.com&#x2F;saroj-pattnaik.png" width="60px" alt="User avatar: " /></a><a href="https://github.com/techmedic5"><img src="https:&#x2F;&#x2F;github.com&#x2F;techmedic5.png" width="60px" alt="User avatar: Alan" /></a><a href="https://github.com/ddocta"><img src="https:&#x2F;&#x2F;github.com&#x2F;ddocta.png" width="60px" alt="User avatar: Damien Peters" /></a><a href="https://github.com/dcsdigital"><img src="https:&#x2F;&#x2F;github.com&#x2F;dcsdigital.png" width="60px" alt="User avatar: DCS Digital" /></a><a href="https://github.com/pm7y"><img src="https:&#x2F;&#x2F;github.com&#x2F;pm7y.png" width="60px" alt="User avatar: Paul Mcilreavy" /></a><a href="https://github.com/tilwolf"><img src="https:&#x2F;&#x2F;github.com&#x2F;tilwolf.png" width="60px" alt="User avatar: Til Wolf" /></a><a href="https://github.com/ozzyoss77"><img src="https:&#x2F;&#x2F;github.com&#x2F;ozzyoss77.png" width="60px" alt="User avatar: Leopoldo Crhistian Riverin Gomez" /></a><a href="https://github.com/AlphaEcho11"><img src="https:&#x2F;&#x2F;github.com&#x2F;AlphaEcho11.png" width="60px" alt="User avatar: AJEsau" /></a><a href="https://github.com/svanomm"><img src="https:&#x2F;&#x2F;github.com&#x2F;svanomm.png" width="60px" alt="User avatar: Steven VanOmmeren" /></a><a href="https://github.com/socketbox"><img src="https:&#x2F;&#x2F;github.com&#x2F;socketbox.png" width="60px" alt="User avatar: Casey Boettcher" /></a><a href="https://github.com/zebbern"><img src="https:&#x2F;&#x2F;github.com&#x2F;zebbern.png" width="60px" alt="User avatar: " /></a><a href="https://github.com/avineetbespin"><img src="https:&#x2F;&#x2F;github.com&#x2F;avineetbespin.png" width="60px" alt="User avatar: Avineet" /></a><a href="https://github.com/invictus-1"><img src="https:&#x2F;&#x2F;github.com&#x2F;invictus-1.png" width="60px" alt="User avatar: Chris" /></a><a href="https://github.com/mirbyte"><img src="https:&#x2F;&#x2F;github.com&#x2F;mirbyte.png" width="60px" alt="User avatar: mirko" /></a><a href="https://github.com/bisonbet"><img src="https:&#x2F;&#x2F;github.com&#x2F;bisonbet.png" width="60px" alt="User avatar: Tim Champ" /></a><a href="https://github.com/Sinkingdev"><img src="https:&#x2F;&#x2F;github.com&#x2F;Sinkingdev.png" width="60px" alt="User avatar: Peter Mathisen" /></a><a href="https://github.com/Ed-STEM"><img src="https:&#x2F;&#x2F;github.com&#x2F;Ed-STEM.png" width="60px" alt="User avatar: Ed di Girolamo" /></a><a href="https://github.com/milkowski"><img src="https:&#x2F;&#x2F;github.com&#x2F;milkowski.png" width="60px" alt="User avatar: Wojciech Miłkowski" /></a><a href="https://github.com/ADS-Fund"><img src="https:&#x2F;&#x2F;github.com&#x2F;ADS-Fund.png" width="60px" alt="User avatar: ADS Fund" /></a><a href="https://github.com/arc46-io"><img src="https:&#x2F;&#x2F;github.com&#x2F;arc46-io.png" width="60px" alt="User avatar: arc46 GmbH" /></a><a href="https://github.com/liyin2015"><img src="https:&#x2F;&#x2F;github.com&#x2F;liyin2015.png" width="60px" alt="User avatar: Li Yin" /></a><a href="https://github.com/SylphAI-Inc"><img src="https:&#x2F;&#x2F;github.com&#x2F;SylphAI-Inc.png" width="60px" alt="User avatar: SylphAI" /></a><!-- all-sponsors -->
-
-## 🌟 Contributors
-
-[![kariana contributors](https://contrib.rocks/image?repo=mintplex-labs/kariana)](https://github.com/mintplex-labs/kariana/graphs/contributors)
-
-[![Star History Chart](https://api.star-history.com/svg?repos=mintplex-labs/kariana&type=Timeline)](https://star-history.com/#mintplex-labs/kariana&Date)
-
-## 🔗 More Products
-
-- **[VectorAdmin][vector-admin]:** An all-in-one GUI & tool-suite for managing vector databases.
-- **[OpenAI Assistant Swarm][assistant-swarm]:** Turn your entire library of OpenAI assistants into one single army commanded from a single agent.
-
-<div align="right">
-
-[![][back-to-top]](#readme-top)
-
-</div>
+- **Website**: [kariana.app](https://kariana.app)
+- **Documentation**: [docs.kariana.com](https://docs.kariana.com)
+- **KARIANA Plugin**: [github.com/INGIPSA/KARIANA](https://github.com/INGIPSA/KARIANA)
+- **Issues**: [GitHub Issues](https://github.com/INGIPSA/kariana-anythingllm/issues)
+- **Discord**: [Join the community](https://discord.gg/6UyHPeGZAC)
 
 ---
 
-Copyright © 2026 [INGIPSA][profile-link]. <br />
-This project is [MIT](./LICENSE) licensed.
+Copyright &copy; 2026 [INGIPSA](https://github.com/INGIPSA). MIT Licensed.
 
 <!-- LINK GROUP -->
-
-[back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-222628?style=flat-square
-[profile-link]: https://github.com/mintplex-labs
-[vector-admin]: https://github.com/mintplex-labs/vector-admin
-[assistant-swarm]: https://github.com/INGIPSA/openai-assistant-swarm
 [docker-btn]: ./images/deployBtns/docker.png
 [docker-deploy]: ./docker/HOW_TO_USE_DOCKER.md
 [aws-btn]: ./images/deployBtns/aws.png
@@ -274,8 +120,6 @@ This project is [MIT](./LICENSE) licensed.
 [gcp-deploy]: ./cloud-deployments/gcp/deployment/DEPLOY.md
 [do-btn]: https://www.deploytodo.com/do-btn-blue.svg
 [do-deploy]: ./cloud-deployments/digitalocean/terraform/DEPLOY.md
-[render-btn]: https://render.com/images/deploy-to-render-button.svg
-[render-deploy]: https://render.com/deploy?repo=https://github.com/INGIPSA/kariana&branch=render
 [render-btn]: https://render.com/images/deploy-to-render-button.svg
 [render-deploy]: https://render.com/deploy?repo=https://github.com/INGIPSA/kariana&branch=render
 [railway-btn]: https://railway.app/button.svg
