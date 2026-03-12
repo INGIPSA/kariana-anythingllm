@@ -4,6 +4,7 @@ import NewWorkspaceModal, {
   useNewWorkspaceModal,
 } from "../Modals/NewWorkspace";
 import ActiveWorkspaces from "./ActiveWorkspaces";
+import DCCConnectionsList from "./DCCConnectionsList";
 import useLogo from "@/hooks/useLogo";
 import useUser from "@/hooks/useUser";
 import Footer from "../Footer";
@@ -64,6 +65,7 @@ export default function Sidebar() {
                   <div className="flex flex-col gap-y-[14px]">
                     <SearchBox user={user} showNewWsModal={showNewWsModal} />
                     <ActiveWorkspaces />
+                    <DCCConnectionsList />
                   </div>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 pb-3 rounded-b-[16px] bg-theme-bg-sidebar light:bg-slate-200 bg-opacity-80 backdrop-filter backdrop-blur-md z-10">
@@ -174,6 +176,7 @@ export function SidebarMobileHeader() {
                     showNewWsModal={showNewWsModal}
                   />
                   <ActiveWorkspaces />
+                  <DCCConnectionsList />
                 </div>
               </div>
               <div className="z-99 absolute bottom-0 left-0 right-0 pt-2 pb-6 rounded-br-[26px] bg-theme-bg-sidebar bg-opacity-80 backdrop-filter backdrop-blur-md">
