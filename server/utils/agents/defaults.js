@@ -40,6 +40,7 @@ const WORKSPACE_AGENT = {
         ...ImportedPlugin.activeImportedPlugins(),
         ...AgentFlows.activeFlowPlugins(),
         ...(await new MCPCompatibilityLayer().activeMCPServers()),
+        ...new MCPCompatibilityLayer().activeDCCTools(),
       ],
     };
   },
