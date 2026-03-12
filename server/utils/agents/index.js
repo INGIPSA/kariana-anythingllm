@@ -527,6 +527,36 @@ class AgentHandler {
         continue;
       }
 
+      // Load DCC plugin. This is marked by `@@dcc_` in the array of functions to load.
+      // Each DCC tool is converted to an Aibitat plugin via MCPCompatibilityLayer.convertDCCToolToPlugin().
+      // The namespaced tool name (e.g., "blender.create_mesh") is extracted from the @@dcc_ prefix.
+      if (name.startsWith("@@dcc_")) {
+        const namespacedToolName = name.replace("@@dcc_", "");
+        const plugin =
+          new MCPCompatibilityLayer().convertDCCToolToPlugin(
+            namespacedToolName,
+            this.aibitat
+          );
+        if (!plugin) {
+          this.log(
+            `DCC tool ${namespacedToolName} not found or DCC not connected. Skipping inclusion to agent cluster.`
+          );
+          continue;
+        }
+
+        // Replace the placeholder function name with the actual plugin name
+        this.aibitat.agents.get("@agent").functions = this.aibitat.agents
+          .get("@agent")
+          .functions.filter((f) => f !== name);
+        this.aibitat.agents.get("@agent").functions.push(plugin.name);
+
+        this.aibitat.use(plugin.plugin());
+        this.log(
+          `Attached DCC::${plugin.toolName} DCC tool to Agent cluster`
+        );
+        continue;
+      }
+
       // Load imported plugin. This is marked by `@@` in the array of functions to load.
       // and is the @@hubID of the plugin.
       if (name.startsWith("@@")) {

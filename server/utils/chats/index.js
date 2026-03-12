@@ -92,11 +92,26 @@ async function chatPrompt(workspace, user = null) {
   const { SystemSettings } = require("../../models/systemSettings");
   const basePrompt =
     workspace?.openAiPrompt ?? SystemSettings.saneDefaultSystemPrompt;
-  return await SystemPromptVariables.expandSystemPromptVariables(
+  let prompt = await SystemPromptVariables.expandSystemPromptVariables(
     basePrompt,
     user?.id,
     workspace?.id
   );
+
+  // Append DCC context if any DCC applications are connected
+  try {
+    const {
+      getDCCSystemPromptInjection,
+    } = require("../DCCHost/systemPrompt");
+    const dccPrompt = getDCCSystemPromptInjection();
+    if (dccPrompt) {
+      prompt += `\n\n${dccPrompt}`;
+    }
+  } catch {
+    // DCCHost module not available - skip DCC prompt injection
+  }
+
+  return prompt;
 }
 
 // We use this util function to deduplicate sources from similarity searching
