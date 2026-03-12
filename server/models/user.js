@@ -139,6 +139,37 @@ const User = {
       return { user: null, error: this._identifyErrorAndFormatMessage(error) };
     }
   },
+  createFromClerk: async function ({ clerkId, username, role = "default", pfpFilename = null }) {
+    try {
+      // Validate and sanitize username
+      let validUsername = username;
+      try {
+        validUsername = this.validations.username(username);
+      } catch (e) {
+        // If username validation fails, generate a fallback
+        validUsername = `user_${clerkId.slice(-8)}`.toLowerCase();
+      }
+
+      const bcrypt = require("bcryptjs");
+      // Generate a random password hash (users won't use password login)
+      const randomPassword = bcrypt.hashSync(require("crypto").randomBytes(32).toString("hex"), 10);
+
+      const user = await prisma.users.create({
+        data: {
+          clerkId,
+          username: validUsername,
+          password: randomPassword,
+          role: this.validations.role(role),
+          pfpFilename,
+        },
+      });
+      return { user: this.filterFields(user), error: null };
+    } catch (error) {
+      console.error("FAILED TO CREATE CLERK USER.", error.message);
+      return { user: null, error: this._identifyErrorAndFormatMessage(error) };
+    }
+  },
+
   // Log the changes to a user object, but omit sensitive fields
   // that are not meant to be logged.
   loggedChanges: function (updates, prev = {}) {
@@ -375,102 +406,6 @@ const User = {
     });
 
     return currentChatCount < user.dailyMessageLimit;
-  },
-
-  /**
-   * Find a user by their Clerk ID.
-   * @param {string} clerkId - The Clerk user ID.
-   * @returns {Promise<Object|null>} The user object or null if not found.
-   */
-  findByClerkId: async function (clerkId) {
-    try {
-      const user = await prisma.users.findUnique({
-        where: { clerkId },
-      });
-      return user || null;
-    } catch (error) {
-      console.error("FAILED TO FIND USER BY CLERK ID.", error.message);
-      return null;
-    }
-  },
-
-  /**
-   * Create a new user from Clerk authentication data.
-   * Generates a random password hash since Clerk handles auth externally.
-   * @param {Object} params
-   * @param {string} params.clerkId - The Clerk user ID.
-   * @param {string} params.username - The username to use.
-   * @param {string} [params.role="default"] - The role for the user.
-   * @returns {Promise<Object|null>} The created user object or null on error.
-   */
-  createFromClerk: async function ({ clerkId, username, role = "default" }) {
-    try {
-      const bcrypt = require("bcryptjs");
-      const crypto = require("crypto");
-      // Generate a random password hash — Clerk manages actual auth
-      const randomPassword = crypto.randomBytes(32).toString("hex");
-      const hashedPassword = bcrypt.hashSync(randomPassword, 10);
-
-      // Sanitize username for DB: lowercase, replace spaces/invalid chars
-      let safeUsername = username
-        .toLowerCase()
-        .replace(/[^a-z0-9._@-]/g, "")
-        .substring(0, 32);
-      if (!safeUsername || safeUsername.length < 2) {
-        safeUsername = `clerk-${clerkId.substring(0, 20)}`.toLowerCase();
-      }
-      // Ensure starts with lowercase letter
-      if (!/^[a-z]/.test(safeUsername)) {
-        safeUsername = "u" + safeUsername.substring(0, 31);
-      }
-
-      // If username already taken, append random suffix
-      const existing = await prisma.users.findFirst({
-        where: { username: safeUsername },
-      });
-      if (existing) {
-        const suffix = crypto.randomBytes(3).toString("hex");
-        safeUsername = `${safeUsername.substring(0, 25)}-${suffix}`;
-      }
-
-      const user = await prisma.users.create({
-        data: {
-          clerkId,
-          username: safeUsername,
-          password: hashedPassword,
-          role,
-        },
-      });
-      return user;
-    } catch (error) {
-      console.error("FAILED TO CREATE USER FROM CLERK.", error.message);
-      return null;
-    }
-  },
-
-  /**
-   * Sync a user from Clerk: find existing by clerkId, or create a new one.
-   * @param {string} clerkId - The Clerk user ID.
-   * @returns {Promise<Object|null>} The synced user object or null on error.
-   */
-  syncFromClerk: async function (clerkId) {
-    try {
-      // Try to find existing user by clerkId
-      let user = await this.findByClerkId(clerkId);
-      if (user) return user;
-
-      // No existing user — create one.
-      // Determine if this is the first user (make them admin)
-      const userCount = await prisma.users.count();
-      const role = userCount === 0 ? "admin" : "default";
-      const username = `clerk-${clerkId.substring(0, 20)}`;
-
-      user = await this.createFromClerk({ clerkId, username, role });
-      return user;
-    } catch (error) {
-      console.error("FAILED TO SYNC USER FROM CLERK.", error.message);
-      return null;
-    }
   },
 };
 

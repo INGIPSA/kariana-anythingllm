@@ -214,11 +214,12 @@ const SystemSettings = {
       // --------------------------------------------------------
       // General Settings
       // --------------------------------------------------------
-      RequiresAuth: !!process.env.AUTH_TOKEN,
+      RequiresAuth: !!process.env.AUTH_TOKEN || !!(process.env.CLERK_SECRET_KEY && process.env.CLERK_PUBLISHABLE_KEY),
       AuthToken: !!process.env.AUTH_TOKEN,
       JWTSecret: !!process.env.JWT_SECRET,
       StorageDir: process.env.STORAGE_DIR,
-      MultiUserMode: await this.isMultiUserMode(),
+      MultiUserMode: await this.isMultiUserMode() || !!(process.env.CLERK_SECRET_KEY && process.env.CLERK_PUBLISHABLE_KEY),
+      ClerkEnabled: !!(process.env.CLERK_SECRET_KEY && process.env.CLERK_PUBLISHABLE_KEY),
       DisableTelemetry: process.env.DISABLE_TELEMETRY || "false",
 
       // --------------------------------------------------------

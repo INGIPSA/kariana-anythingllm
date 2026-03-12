@@ -1,44 +1,22 @@
+const { isClerkEnabled, clerkAuthMiddleware } = require("./clerkAuth");
 const { SystemSettings } = require("../../models/systemSettings");
 const { User } = require("../../models/user");
 const { EncryptionManager } = require("../EncryptionManager");
 const { decodeJWT } = require("../http");
-const {
-  isClerkEnabled,
-  validateClerkSession,
-} = require("./clerkAuth");
 const EncryptionMgr = new EncryptionManager();
 
 async function validatedRequest(request, response, next) {
-  // Priority: If Clerk is enabled, try to authenticate via Clerk first.
-  // If Clerk auth succeeds, sync user to local DB and proceed.
-  // If Clerk auth fails or is not enabled, fall through to existing JWT/API key validation.
+  // If Clerk is enabled, use Clerk authentication
   if (isClerkEnabled()) {
-    const clerkUserId = await validateClerkSession(request);
-    if (clerkUserId) {
-      const user = await User.syncFromClerk(clerkUserId);
-      if (user) {
-        if (user.suspended) {
-          response
-            .status(401)
-            .json({ error: "User is suspended from system" });
-          return;
-        }
-        response.locals.user = User.filterFields(user);
-        response.locals.multiUserMode = true;
-        next();
-        return;
-      }
-    }
-    // Fall through to standard auth if Clerk session is not present
+    return clerkAuthMiddleware(request, response, next);
   }
 
+  // Legacy auth below (single-user and multi-user modes)
   const multiUserMode = await SystemSettings.isMultiUserMode();
   response.locals.multiUserMode = multiUserMode;
   if (multiUserMode)
     return await validateMultiUserRequest(request, response, next);
 
-  // When in development passthrough auth token for ease of development.
-  // Or if the user simply did not set an Auth token or JWT Secret
   if (
     process.env.NODE_ENV === "development" ||
     !process.env.AUTH_TOKEN ||
@@ -75,11 +53,6 @@ async function validatedRequest(request, response, next) {
     return;
   }
 
-  // Since the blame of this comment we have been encrypting the `p` property of JWTs with the persistent
-  // encryptionManager PEM's. This prevents us from storing the `p` unencrypted in the JWT itself, which could
-  // be unsafe. As a consequence, existing JWTs with invalid `p` values that do not match the regex
-  // in ln:44 will be marked invalid so they can be logged out and forced to log back in and obtain an encrypted token.
-  // This kind of methodology only applies to single-user password mode.
   if (
     !bcrypt.compareSync(
       EncryptionMgr.decrypt(p),
