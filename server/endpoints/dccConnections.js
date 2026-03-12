@@ -1,5 +1,6 @@
 const { reqBody } = require("../utils/http");
 const { DCCConnection } = require("../models/dccConnection");
+const DCCMCPHost = require("../utils/DCCHost");
 const {
   flexUserRoleValid,
   ROLES,
@@ -25,6 +26,59 @@ function dccConnectionEndpoints(app) {
           success: false,
           error: error.message,
           connections: [],
+        });
+      }
+    }
+  );
+
+  // Status and tools endpoints must come before /:id to avoid route conflicts
+  app.get(
+    "/v1/dcc-connections/status",
+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    async (_request, response) => {
+      try {
+        const host = new DCCMCPHost();
+        const status = await host.getStatus();
+        return response.status(200).json({
+          success: true,
+          connections: status,
+        });
+      } catch (error) {
+        console.error("Error getting DCC connection status:", error);
+        return response.status(500).json({
+          success: false,
+          error: error.message,
+          connections: [],
+        });
+      }
+    }
+  );
+
+  app.get(
+    "/v1/dcc-connections/tools",
+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    async (_request, response) => {
+      try {
+        const host = new DCCMCPHost();
+        const tools = host.getAllTools().map((tool) => ({
+          name: tool.name,
+          namespacedName: tool.namespacedName,
+          description: tool.description || "",
+          inputSchema: tool.inputSchema || {},
+          connectionId: tool.connectionId,
+          appType: tool.appType,
+          connectionName: tool.connectionName,
+        }));
+        return response.status(200).json({
+          success: true,
+          tools,
+        });
+      } catch (error) {
+        console.error("Error listing DCC tools:", error);
+        return response.status(500).json({
+          success: false,
+          error: error.message,
+          tools: [],
         });
       }
     }
@@ -207,6 +261,44 @@ function dccConnectionEndpoints(app) {
         }
       } catch (error) {
         console.error("Error testing DCC connection:", error);
+        return response.status(500).json({
+          success: false,
+          error: error.message,
+        });
+      }
+    }
+  );
+
+  app.post(
+    "/v1/dcc-connections/:id/connect",
+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    async (request, response) => {
+      try {
+        const { id } = request.params;
+        const host = new DCCMCPHost();
+        const result = await host.connect(parseInt(id));
+        return response.status(200).json(result);
+      } catch (error) {
+        console.error("Error connecting to DCC:", error);
+        return response.status(500).json({
+          success: false,
+          error: error.message,
+        });
+      }
+    }
+  );
+
+  app.post(
+    "/v1/dcc-connections/:id/disconnect",
+    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    async (request, response) => {
+      try {
+        const { id } = request.params;
+        const host = new DCCMCPHost();
+        const result = await host.disconnect(parseInt(id));
+        return response.status(200).json(result);
+      } catch (error) {
+        console.error("Error disconnecting from DCC:", error);
         return response.status(500).json({
           success: false,
           error: error.message,
